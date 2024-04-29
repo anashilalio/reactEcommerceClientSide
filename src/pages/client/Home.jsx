@@ -1,11 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
 import { contextProviderInfo } from '../../context/ContextProvider'
+import Hero from '../../components/hero'
 export const Home = () => {
-  const {userData , userExist} = useContext(contextProviderInfo)
   return (
     <div>
-      hello {userData.username}
+     
+      <Hero />
     </div>
   )
 }

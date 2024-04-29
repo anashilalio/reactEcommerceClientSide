@@ -1,17 +1,19 @@
 import axios from 'axios';
 import React, { useDebugValue, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
   const [username , setUsername] = useState(""); 
   const [password , setPasswoord] = useState("");
   const [Invalidinput , setInvalidInput] = useState(false);
+  const navigate = useNavigate();
   const SignIn= async(e)=>{
     e.preventDefault();
     if(!(username===""||password ==="")){
       try{
         const response = await axios.post("http://localhost/ecommerce%20project/client/signin.php" , {username , password}) 
         console.log(response.data)
-  
+        navigate("/Login")
       }catch(error){
         console.error(error)
       }
@@ -27,7 +29,7 @@ export const SignIn = () => {
     <div className='bg-blue-500 h-screen flex  items-center '>
 
       
-      <form onSubmit={SignIn} className='w-auto  bg-white shadow-black shadow-sm mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
+      <form onSubmit={SignIn} className='w-auto  bg-white text-black shadow-sm mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
       <h1 className='font-black text-4xl'>SignIn</h1>
       {Invalidinput && 
       <div className='bg-red-600 text-white py-2 px-8 '>please entre a valid <br /> username or password</div> }

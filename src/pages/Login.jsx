@@ -8,11 +8,15 @@ import { contextProviderInfo } from '../context/ContextProvider';
 const Login = () => {
     const [username , setUsername] = useState(""); 
     const [password , setPasswoord] = useState("");
-    const {userExist , userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
+    const {userExist ,login , setLogin, userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
   const [Invalidinput , setInvalidInput] = useState(false);
   const navigate = useNavigate(); // Get the navigate object
-
   
+  useEffect(()=>{
+    if(login){
+      navigate("/")
+    }
+  },[login])
   const SignIn = async(e) => {
     e.preventDefault();
     if(!(username === "" || password === "")){
@@ -24,13 +28,17 @@ const Login = () => {
             password: password
           
         });
+
         if(response.data==="user doesn't exist"){
             console.log("error")
             SetUserExist(false)
+            localStorage.removeItem('isLoggedIn')
         }else{
             setUserData(response.data)
             SetUserExist(true)
-            navigate("/")
+            console.log(response.data)
+            setLogin(true)
+            localStorage.setItem('isLoggedIn', 'true')
         }
       } catch(error) {
         console.error(error);
@@ -43,12 +51,13 @@ const Login = () => {
     }
     
   }
+  console.log(login)
   return (
     <>
     <div className='bg-blue-500 h-screen flex  items-center '>
 
       
-      <form onSubmit={SignIn}  className='w-auto  bg-white shadow-black shadow-sm mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
+      <form onSubmit={SignIn}  className='w-auto  bg-white shadow-black text-black  shadow-sm mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
       <h1 className='font-black text-4xl'>Login</h1>
       {(Invalidinput || !userExist) && 
       <div className='bg-red-600 text-white py-2 px-8 '>please entre a valid <br /> username or password</div> }
