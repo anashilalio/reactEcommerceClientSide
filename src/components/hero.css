@@ -1,0 +1,23 @@
+.content{
+    transition: all 1s;
+    animation: move 2s ease;
+}
+.hero img{
+    animation: loading 2s ease;
+}
+@keyframes move{
+    from{
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
+@keyframes loading {
+    from{
+        transform: translateX(100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}

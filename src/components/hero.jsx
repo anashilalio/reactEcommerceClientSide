@@ -1,15 +1,19 @@
 import React from 'react'
-import deepwork from '../../public/cover.jpg'
-
+import deepwork from '../../public/book covers.png'
+import './hero.css'
 const hero = () => {
   return (
-    <div className='flex justify-around items-center'>
-        <div className="content absolute">
-        <h1 className='text-5xl text-black font-mono font-extrabold'>Discover Worlds Between Pages: <br /> Journey Into Our Bookshop</h1>
-        <button className='ml-60 py-2 px-4 mt-4 bg-blue-500 font-mono hover:bg-blue-400'>discover</button>
-        </div>
+    <div className='hero flex -mt-16  items-center h-screen transition-all overflow-hidden'>
+        <div className="ml-4 content ">
+        <h1 className='text-5xl text-black font-mono font-extrabold '>Discover Worlds Between Pages:  Journey Into Our Bookshop</h1>
+        <div className='w-full flex '>
+        <button className='mx-auto bg-black text-white font-mono font-extrabold
+         px-6 py-2 rounded-lg mb-5 hover:shadow-xl hover:-translate-y-1 ease duration-200'>discover more</button>
 
-        <img src={deepwork} alt="" className=' h-screen w-full'/>
+        </div>
+        </div>
+        <img src={deepwork} alt="" className='h-3/5 ' />
+        
     </div>
   )
 }

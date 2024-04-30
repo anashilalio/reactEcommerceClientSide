@@ -11,21 +11,21 @@ export const Navbar = (props) => {
   return (
     <div>
       {props.item ?
-      <div className='bg-blue-500 flex gap-4 justify-between px-6 h-16 items-center'>
+      <div className='bg flex gap-4 justify-between px-6 h-16 items-center'>
         <div>
             <Link to="/">Logo</Link>
         </div>
         <div className='flex  gap-2'>
-        <Link to="/">
+        <Link to="/"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>
             Home
         </Link>
         <br />
-        <Link to='products'>
+        <Link to='products'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>
             product
         </Link>
-        <Link to="/ContactUs">ContactUs</Link>
-        <Link to="/SignIn">SignIn</Link>
-        <Link to='/Login'>Login</Link>
+        <Link to="/ContactUs" className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>ContactUs</Link>
+        <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>SignIn</Link>
+        <Link to='/Login'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Login</Link>
         </div>
       </div>
       
@@ -37,9 +37,9 @@ export const Navbar = (props) => {
         <div className='flex  gap-2'>
         
         
-        <Link to='/addProductForm'>Add Product</Link>
-        <Link to="/signin">Logout</Link>
-        <Link to='/Users'>Users</Link>
+        <Link to='/addProductForm'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Add Product</Link>
+        <Link to="/signin"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Logout</Link>
+        <Link to='/Users'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Users</Link>
         </div>
       </div>
       }
