@@ -6,7 +6,7 @@ import { transform } from 'framer-motion';
 import { all } from 'axios';
 const CustomersReviews = () => {
     const [xpos , setXpos ] = useState(0) ;
-    
+    const [first , setFirst] = useState(0);
      
     const Reviews = ({ photo }) => {
         return <>
@@ -19,30 +19,40 @@ const CustomersReviews = () => {
             
         </>
     }
-    const [reviews, setReviews] = useState([imane, ahmed, ahmed, ahmed, ahmed, ahmed]);
+    const [reviews, setReviews] = useState([imane, ahmed, ahmed, imane, ahmed, ahmed]);
 useEffect(() => {
     
         setReviews(prevReviews => {
-            const firstReview = prevReviews[0];
+            
+            const firstReview = prevReviews[first];
             const remainingReviews = [...prevReviews];
-            remainingReviews.shift();
+            
             remainingReviews.push(firstReview);
+            setFirst(e=>e+1)
             return remainingReviews;
           });
       
 
   }, [xpos]);
-    const nextButton = ()=>{
-        
-        setXpos(prevXpos => prevXpos + 28);
-        
-    }
+  const nextButton = () => {
+    setXpos(prevXpos => {
+      return prevXpos+27.5;
+    });
+  
+    setReviews(prevReviews => {
+        const firstReview = prevReviews[first];
+        const remainingReviews = [...prevReviews];
+        remainingReviews.push(firstReview); // Add firstReview to the end of remainingReviews
+        setFirst(e => e + 1); // Increment the 'first' state
+        return remainingReviews; // Return the updated array
+      });
+  };
     return (
-        <div className='h-screen  flex-col overflow-hidden'>
+        <div className='h-screen  flex-col '>
             <div>CustomersReviews</div>
             <div className=" ml-8 flex justify-around items-center mt-auto gap-6 ">
                 {reviews.map((photo, index)=>{
-                    return <div className='bg bg-slate-900 h-64 w-120 shrink-0 transition-all duration-300' style={xpos<165 ? {transform:`translateX(-${xpos}rem)` ,transition:"all 2s"}:{transform:`translateX(0rem)` ,transition:"all 2s"} }>
+                    return <div className='bg bg-slate-900 h-64 w-120 shrink-0 transition-all duration-300' style={{transform:`translateX(-${xpos}rem)` ,transition:"all 2s"} }>
                      <Reviews key={index} photo={photo} />
                      </div>
                 })}
