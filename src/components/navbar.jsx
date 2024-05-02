@@ -9,7 +9,7 @@ export const Navbar = (props) => {
     return null;
   }
   return (
-    <div>
+    <div className='fixed top-0 z-10 w-full'>
       {props.item ?
       <div className='bg flex gap-4 justify-between px-6 h-16 items-center'>
         <div>

@@ -5,6 +5,7 @@ import Hero from '../../components/hero'
 import Categories from '../../components/categories'
 import BestBooks from '../../components/BestBooks'
 import CustomersReviews from '../../components/customerReviews'
+import AboutUs from '../../components/AboutUs'
 
 export const Home = () => {
   return (
@@ -14,6 +15,7 @@ export const Home = () => {
       <Categories />
       <BestBooks />
       <CustomersReviews />
+      <AboutUs />
     </div>
   )
 }
