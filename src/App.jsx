@@ -9,8 +9,10 @@ import AddProductForm from "./pages/admin/AddProductForm";
 import Users from "./pages/admin/users";
 import Login from "./pages/Login";
 import ContextProviderClient from "./context/ContextProvider";
+import AddCategorie from "./pages/admin/addCategorie";
+
 function App() {
-  const [isClient , setIsClient ] = useState(true);
+  const [isClient , setIsClient ] = useState(false);
   return (
     <>
 <ContextProviderClient>
@@ -36,6 +38,7 @@ function App() {
           <Route path="/addProductForm" element={<AddProductForm/>}/>
           <Route path="/Users" element={<Users/>}/>
           <Route path="/Login" element={<Login/>}/>
+          <Route path="/addCategorie" element={<AddCategorie/>}/>
         </Routes>
 </ContextProviderClient>
 

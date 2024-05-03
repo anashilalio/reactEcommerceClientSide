@@ -12,7 +12,7 @@ export const Users = () => {
         usersInfo()
     },[])
   return (
-    <div>
+    <div className='mt-16'>
         {users.map((user)=>{
             return<>
                 <div>

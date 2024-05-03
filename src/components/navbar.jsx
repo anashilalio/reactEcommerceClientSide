@@ -36,10 +36,11 @@ export const Navbar = (props) => {
         </div>
         <div className='flex  gap-2'>
         
-        
+        <Link to="/addCategorie"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>addCategorie</Link>
         <Link to='/addProductForm'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Add Product</Link>
         <Link to="/signin"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Logout</Link>
         <Link to='/Users'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg'>Users</Link>
+     
         </div>
       </div>
       }

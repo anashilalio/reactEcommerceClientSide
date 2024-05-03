@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Categorie from './Categorie';
 export const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -8,14 +8,15 @@ export const Products = () => {
       let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");
       let json = await res.json();
       setProducts(json);
-      console.log(products)
     }
 
     fetchProducts();
   }, []);
 
   return (
-    <div>
+    <div className='mt-16 flex '>
+      <Categorie />
+      <div className="products ml-96">
       {products.map((product) => {
         return<>
         <h1>{product.name}</h1>
@@ -23,6 +24,10 @@ export const Products = () => {
         <h3>{product.price}</h3>
         </>
       })}
+      </div>
+      <div>
+
+      </div>
     </div>
   );
 }
