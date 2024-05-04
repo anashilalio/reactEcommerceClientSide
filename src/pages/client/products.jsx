@@ -8,6 +8,7 @@ export const Products = () => {
       let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");
       let json = await res.json();
       setProducts(json);
+      console.log(json)
     }
 
     fetchProducts();
@@ -22,6 +23,7 @@ export const Products = () => {
         <h1>{product.name}</h1>
         <h2>{product.description}</h2>
         <h3>{product.price}</h3>
+        <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" />
         </>
       })}
       </div>

@@ -8,7 +8,6 @@ const Categorie = () => {
             const res = await response.json();
             
             setCategories(res)
-            console.log("response" , res);
          }
          getCategories();
          
