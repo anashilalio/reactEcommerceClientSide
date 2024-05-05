@@ -8,7 +8,7 @@ export const ContactUs = () => {
   const [lastName, setLastName] = useState("");
 
   const inputStyle = ()=> {
-    return ('outline-none w-130 h-12 space-x-8 px-4 text-black')
+    return ('outline-none w-130 h-12 space-x-8 px-4 text-black border-b-2')
   }
   const sendEmail=async (e)=>{
     e.preventDefault();
@@ -19,13 +19,13 @@ export const ContactUs = () => {
     <div className=' '>
       <form onClick={sendEmail} className='flex flex-col justify-center items-center h-screen space-y-10 '>
         <div className="w-130 h-12 space-x-8 text-black" >
-        <input type="firstName" value={firstName} name='firstName' placeholder='FirstName' className='outline-none w-56 h-full px-4'  onChange={e=>setFirstName(e.target.value)}/>
-        <input type="lastName" value={lastName} name='LastName' placeholder='LastName' className='outline-none w-56 h-full px-4' onChange={e=>setLastName(e.target.value)}/>
+        <input type="firstName" value={firstName} name='firstName' placeholder='FirstName' className='outline-none w-56 h-full px-4 border-b-2'  onChange={e=>setFirstName(e.target.value)}/>
+        <input type="lastName" value={lastName} name='LastName' placeholder='LastName' className='outline-none w-56 h-full px-4 border-b-2' onChange={e=>setLastName(e.target.value)}/>
 
         </div>
       <input type="  " value={email} name='email' placeholder='email' className={inputStyle()} onChange={e=>setEmail(e.target.value)}/>
-      <input type="message" value={message} name='message' placeholder='message' className={inputStyle()} onChange={e=>setMessage(e.target.value)}/>
-      <input type="submit"  className='bg-blue-400 w-130 h-12 rounded-xl hover:bg-blue-300 cursor-pointer'/>
+      <input type="message" value={message} name='message' placeholder='message' className={`${inputStyle()} h-20`} onChange={e=>setMessage(e.target.value)}/>
+      <input type="submit"  className='bg-black w-130 text-white h-12 rounded-xl hover:opacity-80 cursor-pointer'/>
       </form>
       
     </div>

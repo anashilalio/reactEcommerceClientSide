@@ -5,9 +5,12 @@ export const contextProviderInfo = createContext();
 const ContextProviderClient = ({children}) => {
     const [userData ,setUserData ] = useState([]);
     const [userExist , SetUserExist] = useState(false);
-    const [login , setLogin] = useState(localStorage.getItem('isLoggedIn') === 'true');
+    const [currentCtg , setCurrentCtg ] = useState();
+    
+
+    // const [login , setLogin] = useState(localStorage.getItem('isLoggedIn') === 'true');
   return (
-    <contextProviderInfo.Provider value={{userData , setUserData,login , setLogin , userExist , SetUserExist}}>
+    <contextProviderInfo.Provider value={{userData , setUserData , userExist , SetUserExist , currentCtg , setCurrentCtg}}>
         {children}
         
     </contextProviderInfo.Provider>

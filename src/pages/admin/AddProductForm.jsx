@@ -26,6 +26,11 @@ export const AddProductForm = () => {
         } catch (error) {
           console.error(error);
         }
+        setDescription("");
+        setImage(null)
+        setPreviewImage(null)
+        setProductname("")
+        setPrice(0)
       };
       useEffect(()=>{
         const getCategories = async()=>{
@@ -35,9 +40,8 @@ export const AddProductForm = () => {
           setCategories(json)
         }
         getCategories()
-        console.log(name)
         
-      },[image])
+      },[])
       
       const handleSelect = (e)=>{
         setCategorie(e.target.value)
@@ -46,21 +50,28 @@ export const AddProductForm = () => {
       const handleImageChange = (e) => {
         setImage(e.target.files[0]);
         setPreviewImage(URL.createObjectURL(e.target.files[0]));
+        console.log(previewImage)
+    }
+    const inputStyle = ()=>{
+     return 'w-72 h-10 outline-none border-b-2'
     }
 
   return (
-    <div className='mt-16 text-black'>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="">image</label>
-          <input type="file" name='image' onChange={handleImageChange} accept="image/*"/>
-            <label htmlFor="">product Name</label>
-            <input type="text" value={name} name='name' onChange={e => setProductname(e.target.value)} />
-            <label htmlFor="">description</label>
-            <input type="text" value={description} name='description' onChange={e => setDescription(e.target.value)} />
-            <label htmlFor="">Price</label>
-            <input type="number" name='price' value={price}  onChange={e => setPrice(e.target.value)}/>
-            <label htmlFor="">categorie</label>
-            <select name="" id="" onChange={handleSelect}>
+    <div className='ml-48 '>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center space-y-6'>
+          {/* <label htmlFor="">image</label> */}
+          
+          <input type="file" name='image' onChange={handleImageChange} accept="image/*" className=' p-2 mt-2 file:rounded-xl file:bg-black file:text-white
+          file:border-none file:px-4 file:py-2 file:cursor-pointer hover:file:shadow-xl hover:file:scale-105 ' />
+          {previewImage && <img src={previewImage}  className='size-44'/>}
+            {/* <label htmlFor="">product Name</label> */}
+            <input type="text" value={name} name='name' onChange={e => setProductname(e.target.value)} className={inputStyle()} placeholder='title'/>
+            {/* <label htmlFor="">description</label> */}
+            <input type="text" value={description} name='description' onChange={e => setDescription(e.target.value)} className={inputStyle()} placeholder='description' />
+            {/* <label htmlFor="">Price</label> */}
+            <input type="number" name='price' value={price}  onChange={e => setPrice(e.target.value)} className={inputStyle()} placeholder='price'/>
+            {/* <label htmlFor="">categorie</label> */}
+            <select name="" id="" onChange={handleSelect} className={inputStyle()}>
              {categories.map((categorie)=>{
               return<>
                 <option value={categorie.categorie}>{categorie.categorie}</option>
@@ -68,10 +79,10 @@ export const AddProductForm = () => {
              })}
 
             </select>
-            <input type="submit" className='text-white' value='add product'/>
+            <input type="submit"  value='add product' className="bg-black w-72 h-12 rounded-lg text-white cursor-pointer hover:opacity-80 "/>
             
         </form>
-        {previewImage && <img src={previewImage}  />}
+        
 
     </div>
   )

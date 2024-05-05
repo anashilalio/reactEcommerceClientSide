@@ -9,7 +9,7 @@ const AddCategorie = () => {
         console.log(response)
     }
   return (
-    <div className='mt-16 text-white'>
+    <div className='mt-16  ml-72'>
         <form onSubmit={addCategorie}>
             <input type="addCategorie" placeholder='add' name='categorie' className='text-black' value={categorie} onChange={e=>setCategorie(e.target.value)}  />
             <input type="submit" />

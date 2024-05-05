@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Categorie from './Categorie';
-export const Products = () => {
-  const [products, setProducts] = useState([]);
+import { useParams } from 'react-router-dom';
+import { FaStar } from "react-icons/fa";
 
+export const Products = ({type}) => {
+  const [products, setProducts] = useState([]);
+  const icon = ()=>{
+     
+    for(let i = 0 ; i<5 ; i++){
+      return<Fastar/>
+    }
+  }
   useEffect(() => {
     async function fetchProducts() {
       let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");
@@ -13,22 +21,34 @@ export const Products = () => {
 
     fetchProducts();
   }, []);
+  const { categorie } = useParams();
+  const filteredProducts = products.filter(product => product.categorie === categorie);
 
   return (
     <div className='mt-16 flex '>
       <Categorie />
-      <div className="products ml-96">
-      {products.map((product) => {
+      <div className="products ml-96 mt-12 flex flex-wrap gap-12 ">
+      {filteredProducts.map((product) => {
         return<>
-        <h1>{product.name}</h1>
-        <h2>{product.description}</h2>
-        <h3>{product.price}</h3>
-        <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" />
+        <div className='w-56 cursor-pointer hover:scale-105 transition-all duration-150'>
+        <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" className='w-full h-72' />
+        <h1 className='text-xl font-extrabold text-center font-mono '>{product.name}</h1>
+        <h3 className='text-xl text-center'>{product.categorie}</h3>
+        <div className='flex mx-20'>
+        {[...Array(5)].map((_, index) => <FaStar key={index} color='orange' />)}
+
+        </div>
+        
+        
+        <h3 className='text-xl text-center'>{product.price} DH</h3>
+        </div>
+        
+        
         </>
       })}
       </div>
       <div>
-
+      
       </div>
     </div>
   );

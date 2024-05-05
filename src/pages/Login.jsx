@@ -4,19 +4,17 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { contextProviderInfo } from '../context/ContextProvider';
-
+import logo from '../../public/logo.png'
 const Login = () => {
     const [username , setUsername] = useState(""); 
     const [password , setPasswoord] = useState("");
-    const {userExist ,login , setLogin, userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
+    const {userExist , userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
   const [Invalidinput , setInvalidInput] = useState(false);
+  const [email , setEmail ] = useState("");
+
   const navigate = useNavigate(); // Get the navigate object
   
-  useEffect(()=>{
-    if(login){
-      navigate("/")
-    }
-  },[login])
+  
   const SignIn = async(e) => {
     e.preventDefault();
     if(!(username === "" || password === "")){
@@ -36,9 +34,8 @@ const Login = () => {
         }else{
             setUserData(response.data)
             SetUserExist(true)
-            console.log(response.data)
-            setLogin(true)
-            localStorage.setItem('isLoggedIn', 'true')
+            navigate("/")
+            
         }
       } catch(error) {
         console.error(error);
@@ -51,14 +48,13 @@ const Login = () => {
     }
     
   }
-  console.log(login)
   return (
     <>
-    <div className='bg-blue-500 h-screen flex  items-center '>
+    <div className=' h-screen flex  items-center '>
 
       
-      <form onSubmit={SignIn}  className='w-auto  bg-white shadow-black text-black  shadow-sm mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
-      <h1 className='font-black text-4xl'>Login</h1>
+      <form onSubmit={SignIn}  className='w-auto  bg-white shadow-2xl text-black   mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
+      <h1 className='font-black text-4xl'><img src={logo} className='size-32' alt="" /></h1>
       {(Invalidinput || !userExist) && 
       <div className='bg-red-600 text-white py-2 px-8 '>please entre a valid <br /> username or password</div> }
         <div className='flex justify-between'>
@@ -67,12 +63,21 @@ const Login = () => {
         placeholder='username' className='h-10 w-60 outline-none px-4 border-b-2 border-black '/>
         </div>
         <div className='flex justify-between'>
+        {/* <label htmlFor="">username</label> */}
+        <input type="text" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} 
+        placeholder='email' className='h-10 w-60 outline-none px-4 border-b-2 border-black '/>
+        </div>
+        <div className='flex justify-between'>
         {/* <label htmlFor="">password</label> */}
         <input type="password" name='password' value={password} onChange={(e)=>setPasswoord(e.target.value)}
          placeholder='password'className='h-10 w-60 outline-none px-4 border-b-2 border-black '/>
         </div>
         
-        <input type="submit"  className='bg-blue-500 h-10 w-60 hover:bg-blue-400 cursor-pointer text-white'/>
+        <input type="submit"  className={username==="" || password==="" 
+        ?
+        "bg-blue-500 h-10 w-60 hover:bg-blue-400 cursor-not-allowed text-white"
+      :'bg-blue-500 h-10 w-60 hover:bg-blue-400 cursor-pointer text-white'
+      }/>
         {userExist &&
             <div>
                 {userData.username}

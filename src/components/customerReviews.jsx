@@ -12,6 +12,7 @@ const CustomersReviews = () => {
         return <>
         
                 <img src={photo} alt="" className='rounded-full w-12'/>
+                
             <div className='reviewtext '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quod pariatur eos itaque voluptate consectetur
                 minima commodi. Voluptates vero
                 qui placeat? Placeat tenetur earum et assumenda maiores minus, architecto laboriosam.</div>
@@ -54,8 +55,8 @@ useEffect(() => {
 //       });
 //   };
     return (
-        <div className='ml-8 h-screen  flex-col overflow-hidden'>
-            <div className='text-center mb-32 text-6xl'>CustomersReviews</div>
+        <div className='ml-8 h-screen  flex-col overflow-hidden text-white'>
+            <div className='text-center mb-32 text-6xl text-black'>CustomersReviews</div>
             <div className=" flex justify-around items-center mt-auto gap-6">
                 {reviews.map((photo, index)=>{
                     return <div className='bg bg-slate-900 h-64 w-120 shrink-0 transition-all duration-300' style={{transform:`translateX(-${xpos}rem)` ,transition:"all 2s"} }>

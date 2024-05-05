@@ -10,6 +10,8 @@ import Users from "./pages/admin/users";
 import Login from "./pages/Login";
 import ContextProviderClient from "./context/ContextProvider";
 import AddCategorie from "./pages/admin/addCategorie";
+import Categorie from "./pages/client/Categorie";
+import Cart from "./pages/client/Cart";
 
 function App() {
   const [isClient , setIsClient ] = useState(false);
@@ -31,14 +33,18 @@ function App() {
 
       }
        <Routes>
-          <Route path="/products" element={<Products/>}/>
+          <Route path="/categorie" element={<Categorie/>}/>
           <Route path="/" element={<Home/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
+          <Route path="/products/:categorie" element={<Products />} />
+
           <Route path="/SignIn" element={<SignIn />}/>
           <Route path="/addProductForm" element={<AddProductForm/>}/>
           <Route path="/Users" element={<Users/>}/>
           <Route path="/Login" element={<Login/>}/>
           <Route path="/addCategorie" element={<AddCategorie/>}/>
+          <Route path="/Cart" element={<Cart/>}/>
+
         </Routes>
 </ContextProviderClient>
 
