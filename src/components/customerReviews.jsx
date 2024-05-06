@@ -1,22 +1,28 @@
 import React, { useState ,useEffect } from 'react'
 import ahmed from "../../public/ahmed.jpg"
 import imane from "../../public/imane.jpg"
+import { FaStar } from "react-icons/fa";
 
-import { transform } from 'framer-motion';
-import { all } from 'axios';
+import { FaStarHalfAlt } from "react-icons/fa";
+
 const CustomersReviews = () => {
     const [xpos , setXpos ] = useState(0) ;
     const [first , setFirst] = useState(0);
      
     const Reviews = ({ photo }) => {
         return <>
-        
-                <img src={photo} alt="" className='rounded-full w-12'/>
+        <div className='flex items-center gap-6'>
+           <img src={photo} alt="" className='rounded-full w-12'/>
+                <h1 className='text-xl font-bold '>Name</h1>
+        </div>
                 
-            <div className='reviewtext '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quod pariatur eos itaque voluptate consectetur
+            <div className='reviewtext mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quod pariatur eos itaque voluptate consectetur
                 minima commodi. Voluptates vero
                 qui placeat? Placeat tenetur earum et assumenda maiores minus, architecto laboriosam.</div>
-            <div className='star'></div>
+            <div className='star flex text-orange-500 mt-4'>
+                {[...Array(4)].map((e)=>{return <FaStar/>})}
+                <FaStarHalfAlt />
+            </div>
             
         </>
     }
@@ -57,9 +63,9 @@ useEffect(() => {
     return (
         <div className='ml-8 h-screen  flex-col overflow-hidden text-white'>
             <div className='text-center mb-32 text-6xl text-black'>CustomersReviews</div>
-            <div className=" flex justify-around items-center mt-auto gap-6">
+            <div className=" flex justify-around items-center mt-auto gap-6 ">
                 {reviews.map((photo, index)=>{
-                    return <div className='bg bg-slate-900 h-64 w-120 shrink-0 transition-all duration-300' style={{transform:`translateX(-${xpos}rem)` ,transition:"all 2s"} }>
+                    return <div className='bg px-8 bg-black h-64 w-120 shrink-0 transition-all duration-300  rounded-xl shadow-2xl' style={{transform:`translateX(-${xpos}rem)` ,transition:"all 2s"} }>
                      <Reviews key={index} photo={photo} />
                      </div>
                 })}

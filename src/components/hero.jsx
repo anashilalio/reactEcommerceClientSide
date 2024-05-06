@@ -1,5 +1,5 @@
 import React from 'react'
-import deepwork from '../../public/book covers.png'
+import deepwork from '../../public/heroCoverBook.png'
 import './hero.css'
 const hero = () => {
   return (

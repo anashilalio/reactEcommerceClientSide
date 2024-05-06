@@ -6,16 +6,18 @@ import Categories from '../../components/categories'
 import BestBooks from '../../components/BestBooks'
 import CustomersReviews from '../../components/customerReviews'
 import AboutUs from '../../components/AboutUs'
+import Footer from '../../components/footer'
 
 export const Home = () => {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
      
       <Hero />
       <Categories />
       <BestBooks />
       <CustomersReviews />
       <AboutUs />
+      <Footer />
     </div>
   )
 }

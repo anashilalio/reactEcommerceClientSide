@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useDebugValue, useState } from 'react'
+import React, { useDebugValue, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import logo from '../../public/logo.png'
 
@@ -7,13 +7,15 @@ export const SignIn = () => {
   const [username , setUsername] = useState(""); 
   const [password , setPasswoord] = useState("");
   const [email , setEmail ] = useState("");
+  const [joined , setJoined ] = useState();
   const [Invalidinput , setInvalidInput] = useState(false);
   const navigate = useNavigate();
   const SignIn= async(e)=>{
+    
     e.preventDefault();
     if(!(username===""||password ==="")){
       try{
-        const response = await axios.post("http://localhost/ecommerce%20project/client/signin.php" , {username , password , email}) 
+        const response = await axios.post("http://localhost/ecommerce%20project/client/signin.php" , {username , password , email ,joined}) 
         console.log(response.data)
         navigate("/Login")
       }catch(error){
@@ -27,6 +29,13 @@ export const SignIn = () => {
     setPasswoord("")
     
   }
+  useEffect(()=>{
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDay();
+    setJoined(`${year}:${month}:${day}`)
+  },[])
   return (
     <div className=' h-screen flex  items-center '>
 
@@ -49,6 +58,7 @@ export const SignIn = () => {
         {/* <label htmlFor="">password</label> */}
         <input type="password" name='password' value={password} onChange={(e)=>setPasswoord(e.target.value)}
          placeholder='password'className='h-10 w-60 outline-none px-4 border-b-2 border-black '/>
+         
         </div>
         
         <input type="submit"  className={username==="" || password==="" 

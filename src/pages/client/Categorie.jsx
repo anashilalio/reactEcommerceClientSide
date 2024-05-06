@@ -13,7 +13,6 @@ const Categorie = () => {
             setCategories(res)
          }
          getCategories();
-         
     },[])
 
     const {currentCtg , setCurrentCtg} = useContext(contextProviderInfo)
@@ -27,7 +26,7 @@ const Categorie = () => {
         {categories.map((ctg)=>{
             return<>
                         <Link   to={`/products/${ctg.categorie}`} 
-        onClick={()=>setCurrentCtg(ctg.categorie)} className='ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono'><CategorieType title={ctg.categorie}/></Link>
+        onClick={()=>setCurrentCtg(ctg.categorie)} className={ctg.categorie===currentCtg ?'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono text-slate-400':'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono'}><CategorieType title={ctg.categorie}/></Link>
     
             </>
         })}

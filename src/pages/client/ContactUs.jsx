@@ -17,14 +17,15 @@ export const ContactUs = () => {
   }
   return (
     <div className=' '>
-      <form onClick={sendEmail} className='flex flex-col justify-center items-center h-screen space-y-10 '>
+      <div className='text-black mt-20 text-center text-5xl font-mono font-bold'>Contact Us</div>
+      <form onClick={sendEmail} className='flex flex-col justify-center items-center h-screen space-y-10 -mt-16 '>
         <div className="w-130 h-12 space-x-8 text-black" >
         <input type="firstName" value={firstName} name='firstName' placeholder='FirstName' className='outline-none w-56 h-full px-4 border-b-2'  onChange={e=>setFirstName(e.target.value)}/>
         <input type="lastName" value={lastName} name='LastName' placeholder='LastName' className='outline-none w-56 h-full px-4 border-b-2' onChange={e=>setLastName(e.target.value)}/>
 
         </div>
       <input type="  " value={email} name='email' placeholder='email' className={inputStyle()} onChange={e=>setEmail(e.target.value)}/>
-      <input type="message" value={message} name='message' placeholder='message' className={`${inputStyle()} h-20`} onChange={e=>setMessage(e.target.value)}/>
+      <textarea type="message" value={message} name='message' placeholder='message' className={`${inputStyle()} h-20`} onChange={e=>setMessage(e.target.value)}/>
       <input type="submit"  className='bg-black w-130 text-white h-12 rounded-xl hover:opacity-80 cursor-pointer'/>
       </form>
       

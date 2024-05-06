@@ -14,7 +14,21 @@ export default {
         "120" : "26rem",
         "130" : "30rem",
         '90p': '90%',
-      }
+      },
+      animation: {
+        bounce200: 'bounce 1s infinite 200ms',
+        spin: 'spin 1s linear infinite',
+      },
+      keyframes: {
+        bounce: {
+          '0%, 100%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' },
+          '50%': { transform: 'none', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' },
+        },
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
     },
   },
   plugins: [],

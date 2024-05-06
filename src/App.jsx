@@ -12,9 +12,10 @@ import ContextProviderClient from "./context/ContextProvider";
 import AddCategorie from "./pages/admin/addCategorie";
 import Categorie from "./pages/client/Categorie";
 import Cart from "./pages/client/Cart";
+import Books from "./pages/admin/Books";
 
 function App() {
-  const [isClient , setIsClient ] = useState(false);
+  const [isClient , setIsClient ] = useState(true);
   return (
     <>
 <ContextProviderClient>
@@ -23,29 +24,38 @@ function App() {
 
       {isClient ?
       <div>
-       
-       
-      </div>
-            :
-          <div>
-          </div>
-
-
-      }
-       <Routes>
+        <Routes>
           <Route path="/categorie" element={<Categorie/>}/>
           <Route path="/" element={<Home/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
           <Route path="/products/:categorie" element={<Products />} />
 
           <Route path="/SignIn" element={<SignIn />}/>
-          <Route path="/addProductForm" element={<AddProductForm/>}/>
-          <Route path="/Users" element={<Users/>}/>
           <Route path="/Login" element={<Login/>}/>
-          <Route path="/addCategorie" element={<AddCategorie/>}/>
           <Route path="/Cart" element={<Cart/>}/>
 
+        
         </Routes>
+       
+      </div>
+            :
+          <div>
+                   <Routes>
+
+              <Route path="/Users" element={<Users/>}/>
+          <Route path="/addProductForm" element={<AddProductForm/>}/>
+          <Route path="/addCategorie" element={<AddCategorie/>}/>
+          <Route path="/Books" element={<Books/>}/>
+
+
+          </Routes>
+
+          </div>
+
+
+      }
+      {}
+      
 </ContextProviderClient>
 
     </>
