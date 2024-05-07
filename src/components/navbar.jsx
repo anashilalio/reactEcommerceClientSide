@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
@@ -10,6 +10,9 @@ import { FaSearch } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
 import { MdOutlineReviews } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
+import { contextProviderInfo } from '../context/ContextProvider';
+import { CgProfile } from "react-icons/cg";
+import { RiHome2Fill } from "react-icons/ri";
 
 export const Navbar = (props) => {
   const location = useLocation();
@@ -18,8 +21,10 @@ export const Navbar = (props) => {
   if (location.pathname === '/SignIn' || location.pathname==="/Login") {
     return null;
   }
+  const {userExist , userData , login , setLogin , setUserData , SetUserExist} = useContext(contextProviderInfo)
+
   return (
-    <div className='fixed top-0 z-10 '>
+    <div className='fixed top-0 z-20 '>
       {props.item ?
       <div className='bg flex gap-4 justify-between px-6 h-16 items-center  bg-black text-white w-screen'>
         <div>
@@ -37,8 +42,17 @@ export const Navbar = (props) => {
         </Link>
         <Link to="/ContactUs" className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>ContactUs</Link>
         <Link to="/cart" className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80 ml-20'><FaShoppingCart /></Link>
-        <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>SignIn</Link>
-        <Link to='/Login'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>Login</Link>
+        {login ?
+        
+        <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80 text-3xl'><CgProfile /></Link>
+        :
+        <div>
+          <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>SignIn</Link>
+          <Link to='/Login'  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>Login</Link>
+        </div>
+        
+        }
+        
         </div>
       </div>
       
@@ -47,13 +61,15 @@ export const Navbar = (props) => {
         <div>
             <Link to="/"><img src={logo} alt="" className='size-32' /></Link>
         </div>
-        <div className='flex  gap-10 flex-col mt-2 '>
+        <div className='flex  gap-6 flex-col mt-2 '>
+        <Link to='/charts'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><RiHome2Fill />dashboard</Link>
         <Link to='/Users'  className=' hover:opacity-80 px-4 py-1 rounded-lg flex items-center gap-2'><FaUser />Users</Link>
         <Link to="/addCategorie"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategory/>addCategorie</Link>
-        <Link to="/addCategorie"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategoryAlt/>categories</Link>
+        <Link to="/categories"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategoryAlt/>categories</Link>
         <Link to='/addProductForm'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdAddCircle />Add Book</Link>
         <Link to='/Books'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><FaBook />Books</Link>
         <Link to='/addProductForm'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdOutlineReviews />Reviews</Link>
+
 
 
 

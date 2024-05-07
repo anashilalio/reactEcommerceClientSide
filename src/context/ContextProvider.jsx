@@ -8,9 +8,9 @@ const ContextProviderClient = ({children}) => {
     const [currentCtg , setCurrentCtg ] = useState();
     
 
-    // const [login , setLogin] = useState(localStorage.getItem('isLoggedIn') === 'true');
+    const [login , setLogin] = useState(localStorage.getItem('isLoggedIn') === 'true');
   return (
-    <contextProviderInfo.Provider value={{userData , setUserData , userExist , SetUserExist , currentCtg , setCurrentCtg}}>
+    <contextProviderInfo.Provider value={{userData ,login , setLogin, setUserData , userExist , SetUserExist , currentCtg , setCurrentCtg}}>
         {children}
         
     </contextProviderInfo.Provider>

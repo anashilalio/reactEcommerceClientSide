@@ -8,13 +8,18 @@ import logo from '../../public/logo.png'
 const Login = () => {
     const [username , setUsername] = useState(""); 
     const [password , setPasswoord] = useState("");
-    const {userExist , userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
+    const {userExist ,login , setLogin , userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
   const [Invalidinput , setInvalidInput] = useState(false);
   const [email , setEmail ] = useState("");
 
   const navigate = useNavigate(); // Get the navigate object
   
-  
+  useEffect(()=>{
+    // if(login){
+    //   navigate("/")
+    // }
+    console.log(login)
+  },[])
   const SignIn = async(e) => {
     e.preventDefault();
     if(!(username === "" || password === "")){
@@ -34,7 +39,12 @@ const Login = () => {
         }else{
             setUserData(response.data)
             SetUserExist(true)
-            navigate("/")
+            setLogin(true)
+            localStorage.setItem('isLoggedIn' , 'true')
+            // navigate("/")
+            
+            
+
             
         }
       } catch(error) {

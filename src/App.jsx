@@ -13,9 +13,11 @@ import AddCategorie from "./pages/admin/addCategorie";
 import Categorie from "./pages/client/Categorie";
 import Cart from "./pages/client/Cart";
 import Books from "./pages/admin/Books";
+import Categories from "./pages/admin/categories";
+import Charts from "./pages/admin/charts";
 
 function App() {
-  const [isClient , setIsClient ] = useState(true);
+  const [isClient , setIsClient ] = useState(false);
   return (
     <>
 <ContextProviderClient>
@@ -46,6 +48,9 @@ function App() {
           <Route path="/addProductForm" element={<AddProductForm/>}/>
           <Route path="/addCategorie" element={<AddCategorie/>}/>
           <Route path="/Books" element={<Books/>}/>
+          <Route path="/categories" element={<Categories/>}/>
+          <Route path="/charts" element={<Charts/>}/>
+
 
 
           </Routes>

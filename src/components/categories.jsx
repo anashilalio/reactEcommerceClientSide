@@ -1,30 +1,45 @@
 import React from 'react'
-import history from '../../public/history.jpg';
-import horror from '../../public/horror.jpg';
-import math from '../../public/math.jpg';
+import history from '../../public/categories/Historycategori.jpg';
+import advanture from '../../public/categories/advatureCategorie.jpg';
+import math from '../../public/categories/mathcategorie.jpg';
+import fantasy from '../../public/categories/fantasycategorie.jpg';
+import horror from '../../public/categories/horrorcategorie.webp';
+import siencefiction  from '../../public/categories/sienceFiction.avif';
+import children  from '../../public/categories/childrenCategorie.webp';
+import police  from '../../public/categories/policeCategorie.webp';
+import economy  from '../../public/categories/Economy.jpg';
+
+
 
 const Categories = () => {
     const Categorie= ({image , title})=>{
         return<>
-        <div className="categorie h-120 cursor-pointer hover:bg-slate-200 hover:scale-105 ease-in duration-300 rounded-lg overflow-hidden">
-            <img src={image} alt="" className=' bg-cover h-90p'/>
-            <div className="title text-center text-3xl">{title}</div>
+        <div className="categorie h-56 w-96 cursor-pointer hover:opacity-90 overflow-hidden relative ">
+            <img src={image} alt="" className=' bg-cover h-full w-full -z-10'/>
+            <div className="title  text-3xl absolute z-10 text-white top-20  w-full text-center bg-black bg-opacity-50 py-2 font-bold font-mono">{title}</div>
         </div>
         </>
         
     }
   return (
-    <div className='space-y-6 h-screen'>
-        <div className="title text-center text-5xl font-mono font-extrabold ">Categories </div>
-        <div className="categories flex justify-around items-center">
+    <div className='space-y-6 '>
+        <div className="title text-center text-5xl font-mono font-extrabold flex justify-center ">Categories </div>
+        <div className="categories flex gap-4 items-center flex-wrap ml-20">
             <Categorie image={history} title="history"/>
-            <Categorie image={horror} title="horror"/>
+            <Categorie image={advanture} title="advanture"/>
             <Categorie image={math} title="math"/>
+            <Categorie image={horror} title="horror"/>
+            <Categorie image={siencefiction} title="siencefiction"/>
+            <Categorie image={fantasy} title="fantasy"/>
+            <Categorie image={children} title="children"/>
+            <Categorie image={police} title="children"/>
+            <Categorie image={economy} title="children"/>
+
 
         </div> 
         <div className='flex '>
         <button className='mx-auto bg-black text-white font-mono font-extrabold
-         px-6 py-2 rounded-lg mb-5  hover:shadow-inherit hover:scale-105 ease duration-200 hover:shadow-2xl'>discover more</button>
+         px-6 py-2 rounded-lg mb-5  hover:shadow-inherit hover:scale-105 ease duration-200 hover:shadow-2xl'>Explorez davantage</button>
         </div>
     </div>
   )

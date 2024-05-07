@@ -62,7 +62,7 @@ useEffect(() => {
 //   };
     return (
         <div className='ml-8 h-screen  flex-col overflow-hidden text-white'>
-            <div className='text-center mb-32 text-6xl text-black'>CustomersReviews</div>
+            <div className='text-center mb-32 text-6xl text-black'>Avis des clients</div>
             <div className=" flex justify-around items-center mt-auto gap-6 ">
                 {reviews.map((photo, index)=>{
                     return <div className='bg px-8 bg-black h-64 w-120 shrink-0 transition-all duration-300  rounded-xl shadow-2xl' style={{transform:`translateX(-${xpos}rem)` ,transition:"all 2s"} }>
