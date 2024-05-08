@@ -1,6 +1,7 @@
 import React, { useEffect ,useState , useContext } from 'react'
 import { FaStar } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
+import { Link, useParams } from 'react-router-dom';
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -15,15 +16,19 @@ const AllProducts = () => {
         fetchProducts();
         
       }, []);
+      const {categorie}=useParams();
   return (
     <div className='ml-96 mt-32 flex gap-12 flex-wrap'>
 
         {products.map((product , index) => {
         return<>
         <div className='w-56 cursor-pointer  transition-all duration-150 relative' key={index}>
-        <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" className={`w-full h-72`} 
+          <Link to={`http://localhost:5173/products/categorie/${product.name}`}>
+          <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" className={`w-full h-72`} 
         onMouseEnter={() => setBeingHover(index)}
         onMouseLeave={() => setBeingHover(null)}/>
+          </Link>
+        
               <div className={`absolute transition-all 
         duration-50 top-2 right-2 text-slate-800 text-lg bg-white bg-opacity-70 rounded-full p-1 hover:bg-opacity-100`}><IoCart /></div>
 

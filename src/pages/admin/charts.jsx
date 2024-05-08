@@ -128,7 +128,9 @@ const counts = {};
       </div>
       <div>
      {console.log(data)}
-     <div></div>
+     <div>
+      
+     </div>
       </div>
     </div>
   )

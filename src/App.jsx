@@ -15,6 +15,7 @@ import Cart from "./pages/client/Cart";
 import Books from "./pages/admin/Books";
 import Categories from "./pages/admin/categories";
 import Charts from "./pages/admin/charts";
+import Book from "./pages/client/book";
 
 function App() {
   const [isClient , setIsClient ] = useState(false);
@@ -27,17 +28,19 @@ function App() {
       {isClient ?
       <div>
         <Routes>
-          <Route path="/categorie" element={<Categorie/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/ContactUs" element={<ContactUs/>}/>
-          <Route path="/products/:categorie" element={<Products />} />
+  <Route path="/products/:categorie/:book" element={<Book />} />
 
-          <Route path="/SignIn" element={<SignIn />}/>
-          <Route path="/Login" element={<Login/>}/>
-          <Route path="/Cart" element={<Cart/>}/>
+  <Route path="/categorie" element={<Categorie/>}/>
+  
 
-        
-        </Routes>
+  <Route path="/products/:categorie" element={<Products />} />
+
+  <Route path="/contactus" element={<ContactUs/>}/>
+  <Route path="/signin" element={<SignIn />}/>
+  <Route path="/login" element={<Login/>}/>
+  <Route path="/cart" element={<Cart/>}/>
+  <Route path="/" element={<Home/>}/>
+</Routes>
        
       </div>
             :
@@ -50,7 +53,7 @@ function App() {
           <Route path="/Books" element={<Books/>}/>
           <Route path="/categories" element={<Categories/>}/>
           <Route path="/charts" element={<Charts/>}/>
-
+          
 
 
           </Routes>
