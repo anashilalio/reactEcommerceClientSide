@@ -62,7 +62,7 @@ export const Navbar = (props) => {
             <Link to="/"><img src={logo} alt="" className='size-32' /></Link>
         </div>
         <div className='flex  gap-6 flex-col mt-2 '>
-        <Link to='/charts'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><RiHome2Fill />dashboard</Link>
+        <Link to='/'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><RiHome2Fill />dashboard</Link>
         <Link to='/Users'  className=' hover:opacity-80 px-4 py-1 rounded-lg flex items-center gap-2'><FaUser />Users</Link>
         <Link to="/addCategorie"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategory/>addCategorie</Link>
         <Link to="/categories"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategoryAlt/>categories</Link>

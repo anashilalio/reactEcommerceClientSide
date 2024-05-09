@@ -18,7 +18,7 @@ import Charts from "./pages/admin/charts";
 import Book from "./pages/client/book";
 
 function App() {
-  const [isClient , setIsClient ] = useState(false);
+  const [isClient , setIsClient ] = useState(true);
   return (
     <>
 <ContextProviderClient>
@@ -29,12 +29,8 @@ function App() {
       <div>
         <Routes>
   <Route path="/products/:categorie/:book" element={<Book />} />
-
   <Route path="/categorie" element={<Categorie/>}/>
-  
-
   <Route path="/products/:categorie" element={<Products />} />
-
   <Route path="/contactus" element={<ContactUs/>}/>
   <Route path="/signin" element={<SignIn />}/>
   <Route path="/login" element={<Login/>}/>
@@ -52,7 +48,7 @@ function App() {
           <Route path="/addCategorie" element={<AddCategorie/>}/>
           <Route path="/Books" element={<Books/>}/>
           <Route path="/categories" element={<Categories/>}/>
-          <Route path="/charts" element={<Charts/>}/>
+          <Route path="/" element={<Charts/>}/>
           
 
 

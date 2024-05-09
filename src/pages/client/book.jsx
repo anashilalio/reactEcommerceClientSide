@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
 import { GrUp } from "react-icons/gr";
 import { GrDown } from "react-icons/gr";
-
+import Reviews from './reviews';
 const Book = () => {
     const [loading, setLoading] = useState(true)
     const { book } = useParams();
@@ -35,7 +35,7 @@ const Book = () => {
                     return <>
                         <div className='ml-20 flex gap-4 mb-12'>
                             <div>
-                                <img className='h-96 shadow-2xl sticky top-28' src={`http://localhost/ecommerce%20project/admin/${bk.images}`} alt="" />
+                                <img className='h-96 shadow-2xl  sticky top-28' src={`http://localhost/ecommerce%20project/admin/${bk.images}`} alt="" />
 
                             </div>
                             <div className='w-2/4 mx-auto'>
@@ -86,87 +86,7 @@ const Book = () => {
 
                     </>
                 })}
-            <div className='w-4/5 mx-auto mt-56'>
-                <div className='text-4xl flex gap-32 items-center mb-12'>
-                    <div>addReviews</div>
-
-                    <div className='flex items-center'>
-                        reviews
-                        <div className='flex flex-col  ml-24 text-sm '>
-
-                            <div className='flex items-center gap-2'>5 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex'>
-
-                                    <div className='bg-blue-400 w-12'>
-
-                                    </div>
-
-                                </div>
-                                (20)
-                            </div>
-                            <div className='flex items-center gap-2'>4 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex'>
-
-                                    <div className='bg-blue-400 w-10'>
-
-                                    </div>
-
-                                </div>
-                                (12)
-                            </div>
-                            <div className='flex items-center gap-2'>3 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex'>
-
-                                    <div className='bg-blue-400 w-4'>
-
-                                    </div>
-
-                                </div>
-                                (5)
-                            </div>
-                            <div className='flex items-center gap-2'>2 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex'>
-
-                                    <div className='bg-blue-400 w-12'>
-
-                                    </div>
-
-                                </div>
-                                (3)
-                            </div>
-                            <div className='flex items-center gap-2'>1 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex'>
-
-                                    <div className='bg-blue-400 w-2'>
-
-                                    </div>
-
-                                </div>
-                                (1)
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-                </div>
-                <div className='flex flex-col gap-12'>
-                    <div className='border-y-2'>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, quas fugit. Optio, iure necessitatibus numquam nam, consequuntur quidem autem, nihil nostrum quisquam minus eveniet? Voluptatem quibusdam at est esse corporis modi officia aut a amet ducimus ut libero, nesciunt eveniet nam incidunt eius placeat itaque repellendus eos? Dicta asperiores voluptatem, facere blanditiis temporibus quo iure at beatae a laudantium exercitationem ut nam consequatur sed nemo voluptate illo maxime? Soluta saepe veritatis, asperiores corrupti facere amet vero assumenda commodi quasi aut pariatur sed quibusdam inventore necessitatibus, quae itaque animi unde impedit laudantium eveniet excepturi id minima ad. Aliquid ducimus soluta eaque!</div>
-                    </div>
-                    <div className='border-y-2'>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, quas fugit. Optio, iure necessitatibus numquam nam, consequuntur quidem autem, nihil nostrum quisquam minus eveniet? Voluptatem quibusdam at est esse corporis modi officia aut a amet ducimus ut libero, nesciunt eveniet nam incidunt eius placeat itaque repellendus eos? Dicta asperiores voluptatem, facere blanditiis temporibus quo iure at beatae a laudantium exercitationem ut nam consequatur sed nemo voluptate illo maxime? Soluta saepe veritatis, asperiores corrupti facere amet vero assumenda commodi quasi aut pariatur sed quibusdam inventore necessitatibus, quae itaque animi unde impedit laudantium eveniet excepturi id minima ad. Aliquid ducimus soluta eaque!</div>
-                    </div>
-                    <div className='border-y-2'>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, quas fugit. Optio, iure necessitatibus numquam nam, consequuntur quidem autem, nihil nostrum quisquam minus eveniet? Voluptatem quibusdam at est esse corporis modi officia aut a amet ducimus ut libero, nesciunt eveniet nam incidunt eius placeat itaque repellendus eos? Dicta asperiores voluptatem, facere blanditiis temporibus quo iure at beatae a laudantium exercitationem ut nam consequatur sed nemo voluptate illo maxime? Soluta saepe veritatis, asperiores corrupti facere amet vero assumenda commodi quasi aut pariatur sed quibusdam inventore necessitatibus, quae itaque animi unde impedit laudantium eveniet excepturi id minima ad. Aliquid ducimus soluta eaque!</div>
-                    </div>
-                    <div className='border-y-2'>
-                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, quas fugit. Optio, iure necessitatibus numquam nam, consequuntur quidem autem, nihil nostrum quisquam minus eveniet? Voluptatem quibusdam at est esse corporis modi officia aut a amet ducimus ut libero, nesciunt eveniet nam incidunt eius placeat itaque repellendus eos? Dicta asperiores voluptatem, facere blanditiis temporibus quo iure at beatae a laudantium exercitationem ut nam consequatur sed nemo voluptate illo maxime? Soluta saepe veritatis, asperiores corrupti facere amet vero assumenda commodi quasi aut pariatur sed quibusdam inventore necessitatibus, quae itaque animi unde impedit laudantium eveniet excepturi id minima ad. Aliquid ducimus soluta eaque!</div>
-                    </div>
-                </div>
-
-            </div>
+            <Reviews  />
             </div>
     }
 
