@@ -28,7 +28,7 @@ const Reviews = () => {
                             <div className='flex items-center gap-2 '>5 reviews
                                 <div className='w-24 bg-gray-400 h-3 flex sm sm:w-12 xl:w-48 md:w-24'>
 
-                                    <div className='bg-blue-400 w-12 sm:w-12 xl:w-12'>
+                                    <div className='bg-blue-400 w-12 sm:w-12 xl:w-12 xl:w-24' >
 
                                     </div>
 
@@ -36,9 +36,9 @@ const Reviews = () => {
                                 (2)
                             </div>
                             <div className='flex items-center gap-2'>4 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-24 md:w-20'>
+                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
 
-                                    <div className='bg-blue-400 w-10 sm:w-6 xl:w-12 md:w-10'>
+                                    <div className='bg-blue-400 w-10 sm:w-6  md:w-10 xl:w-24'>
 
                                     </div>
 
@@ -46,9 +46,9 @@ const Reviews = () => {
                                 (5)
                             </div>
                             <div className='flex items-center gap-2'>3 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-24 md:w-20'>
+                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
 
-                                    <div className='bg-blue-400 w-4 sm:w-6 xl:w-12 md:w-10'>
+                                    <div className='bg-blue-400 w-4 sm:w-6  md:w-10 xl:w-24'>
 
                                     </div>
 
@@ -56,9 +56,9 @@ const Reviews = () => {
                                 (5)
                             </div>
                             <div className='flex items-center gap-2'>2 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-24 md:w-20'>
+                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
 
-                                    <div className='bg-blue-400 w-12 sm:w-6 md:w-10'>
+                                    <div className='bg-blue-400 w-12 sm:w-6 md:w-10 xl:w-24'>
 
                                     </div>
 
@@ -66,9 +66,9 @@ const Reviews = () => {
                                 (3)
                             </div>
                             <div className='flex items-center gap-2 sm:text-sm '>1 reviews
-                                <div className=' bg-gray-400 h-3 flex sm:w-12 xl:w-24 md:w-20'>
+                                <div className=' bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
 
-                                    <div className='bg-blue-400 w-2 sm:w-6 xl:w-12 md:w-10'>
+                                    <div className='bg-blue-400 w-2 sm:w-6 xl:w-24 md:w-10 xl:w-24'>
 
                                     </div>
 

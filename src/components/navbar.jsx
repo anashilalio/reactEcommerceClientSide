@@ -44,7 +44,7 @@ export const Navbar = (props) => {
         <Link to="/cart" className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80 ml-20'><FaShoppingCart /></Link>
         {login ?
         
-        <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80 text-3xl'><CgProfile /></Link>
+        <Link to="/profile"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80 text-3xl'><CgProfile /></Link>
         :
         <div>
           <Link to="/SignIn"  className='hover:bg-black hover:text-white px-4 py-1 rounded-lg hover:opacity-80'>SignIn</Link>
