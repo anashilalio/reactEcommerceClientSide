@@ -15,16 +15,14 @@ const Profile = () => {
         <div className=' whitespace-nowrap -ml-2 mt-4  w-44 shadow-xl border  rounded-2xl px-3 cursor-pointer text-center'>change Photo</div>
 
         </div>
-        <div className='flex gap-10 justify-center w-full items-center '>
-            <div className=''>
-                <div></div>
-            </div>
-            <div className=''>
+        <div className='flex gap-10  w-full '>
+            
+            <div className=' flex justify-around w-full mt-12'>
                 <div>
-                    recent item shoped
+                    recent shopped item
                 </div>
                 <div>
-                    wishlisted 
+                    wishlist
                 </div>
                 <div>
                     
