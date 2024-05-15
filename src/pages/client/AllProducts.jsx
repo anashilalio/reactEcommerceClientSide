@@ -31,7 +31,7 @@ const AllProducts = () => {
       },[wishlistProductId])
       useEffect(()=>{
         const addtocart = async ()=>{
-          let ds = await axios.post("http://localhost/ecommerce%20project/client/cart.php" , { proudctid : cartProductId ,clientid : clientid })
+          let ds = await axios.post("http://localhost/ecommerce%20project/client/cart.php" , { productid : cartProductId ,clientid : clientid })
           console.log(ds)
         }
         addtocart();

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { contextProviderInfo } from '../../context/ContextProvider';
 import { FaStar } from "react-icons/fa";
 import { GrUp } from "react-icons/gr";
 import { GrDown } from "react-icons/gr";
 import Reviews from './reviews';
+import axios from 'axios';
 const Book = () => {
     const [loading, setLoading] = useState(true)
     const { book } = useParams();
     const [bookI, setBookI] = useState([]);
     const [extend, setExtend] = useState(false);
+    const {clientdata } = useContext(contextProviderInfo);
     useEffect(() => {
         const bookInfo = async () => {
             const response = await fetch("http://localhost/ecommerce%20project/client/Product.php");
@@ -16,9 +19,18 @@ const Book = () => {
             setBookI(jsson)
             setLoading(false)
         }
+        console.log(clientdata)
         bookInfo();
     }, [])
     const filterBook = bookI.filter(e => e.name === book);
+        const addToCart = async ()=>{
+            const clientid = parseInt(clientdata.clientid);
+            const productid = parseInt(filterBook[0].productid);
+            console.log(productid)
+            const response = await axios.post("http://localhost/ecommerce%20project/client/cart.php" ,{clientid ,productid: productid} ) ;
+            console.log(response)
+        }
+      
     return (
         <div className='mt-28'>
             {loading ?
@@ -57,11 +69,11 @@ const Book = () => {
 
                                 </div>
                                 <div className='text-4xl mt-12 '>{bk.price}.00$</div>
-                                <button className='bg-black text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
+                                <button onClick={addToCart} className='bg-black text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
                                     Add to Cart
                                 </button>
                                 <div className='w-full  flex justify-center '>
-                                    <button className='border px-8 py-2 text-xl rounded-2xl mt-6 hover:bg-gray-100  shadow-xl'>
+                                    <button className='border px-8 py-2 text-xl rounded-2xl mt-6 hover:bg-gray-100  shadow-xl' >
                                         Add to wishlist
                                     </button>
                                 </div>

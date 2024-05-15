@@ -17,6 +17,7 @@ import Categories from "./pages/admin/categories";
 import Charts from "./pages/admin/charts";
 import Book from "./pages/client/book";
 import Profile from "./pages/client/Profile";
+import Payment from "./pages/client/Payment"
 function App() {
   const [isClient , setIsClient ] = useState(true);
   return (
@@ -33,7 +34,7 @@ function App() {
   <Route path="/products/:categorie" element={<Products />} />
   <Route path="/contactus" element={<ContactUs/>}/>
   <Route path="/profile" element={<Profile />}/>
-
+  <Route path="/Payment" element={<Payment />}/>
   <Route path="/signin" element={<SignIn />}/>
   <Route path="/login" element={<Login/>}/>
   <Route path="/cart" element={<Cart/>}/>
