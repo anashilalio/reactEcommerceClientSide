@@ -27,6 +27,7 @@ const Cart = () => {
       setItems(carttt);
     }
     getCartItems();
+    console.log(deleteThatProduct)
   }, [deleteThatProduct]);
   useEffect(()=>{
     const deleteProduct = async()=>{
@@ -44,7 +45,7 @@ const Cart = () => {
     setTotalOrder(total);
   }, [listItems]);
   return (
-    <div className='mt-20 flex '>
+    <div className='mt-20 flex justify-around'>
       <div className=' '>
       {listItems.map((er)=>{
         

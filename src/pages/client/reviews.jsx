@@ -1,20 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState , useContext } from 'react'
 
 import { FaStar } from "react-icons/fa";
 import ClientReviews from './ClientREviews';
-
-const Reviews = () => {
+import axios from 'axios';
+import { contextProviderInfo } from '../../context/ContextProvider';
+const Reviews = ({productid}) => {
     const [hover , setHover ] = useState(0);
     const [comment , setComment  ] = useState('');
     // const [name , setName ] = useState('');
     const [ clientreview , setClientreview]= useState([])
-    
+    const {clientdata } = useContext(contextProviderInfo)
+    const [reviews  , setReviews ] = useState([]);
     const add =(e)=>{
         e.preventDefault();
         const reviewss = {name : 'name' , review : hover+1 , comment : comment}
 
         return setClientreview([...clientreview , reviewss])
     }
+
+    
+        const sendReview=async ()=>{
+            const clientid = parseInt(clientdata.clientid); 
+            console.log(clientid)
+            const send= await axios.post("http://localhost/ecommerce%20project/client/reviews.php" , {review : comment , 
+                clientid : clientid,productid : productid
+
+             })
+             console.log(send)
+        }
+        useEffect(()=>{
+            const getReviews = async ()=>{
+                const getss = await fetch("http://localhost/ecommerce%20project/client/ClientReview.php");
+                const jssson = await getss.json();
+                 
+                jssson.map((e)=>{
+                    if(productid === parseInt(e.productid) ){
+                        setReviews(p => [...p ,e ]);
+                        
+                    }
+                })
+            }
+            getReviews();
+            console.log(reviews)
+            
+        },[clientdata])
+        console.log(reviews)
+        
   return (
 
         <div className='w-4/5 mx-auto mt-56 '>
@@ -83,8 +114,8 @@ const Reviews = () => {
                     </div>
                 </div>
                 <div className='flex flex-col gap-10'>
-                   {clientreview.map((e)=>{
-                    return <ClientReviews name={e.name} review={e.review} comment={e.comment} />
+                   {reviews.map((e)=>{
+                    return <ClientReviews  review={e.comments} />
 
                    })} 
                     
@@ -104,7 +135,7 @@ const Reviews = () => {
                     {/* <input type="text" className='w-full outline-none border ' value={name} onChange={(e)=>setName(e.target.value)}/> */}
 
                     <textarea type="text" className='w-full outline-none border ' value={comment} onChange={(e)=>setComment(e.target.value)}/>
-                    <input type="submit" className='cursor-pointer'/>
+                    <input type="submit" className='cursor-pointer' onClick={()=>sendReview()}/>
                 </form>
             </div>
   )

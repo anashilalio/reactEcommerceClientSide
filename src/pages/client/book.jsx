@@ -30,6 +30,8 @@ const Book = () => {
             const response = await axios.post("http://localhost/ecommerce%20project/client/cart.php" ,{clientid ,productid: productid} ) ;
             console.log(response)
         }
+        
+
       
     return (
         <div className='mt-28'>
@@ -98,7 +100,7 @@ const Book = () => {
 
                     </>
                 })}
-            <Reviews  />
+            <Reviews productid={parseInt(filterBook[0].productid)} />
             </div>
     }
 

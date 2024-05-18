@@ -1,4 +1,4 @@
-import React , {useContext} from 'react'
+import React , {useContext, useEffect, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
@@ -16,13 +16,24 @@ import { RiHome2Fill } from "react-icons/ri";
 
 export const Navbar = (props) => {
   const location = useLocation();
-
+  const {userExist ,result , setResult,search , setSearch , login , setLogin  , SetUserExist} = useContext(contextProviderInfo)
+  const [Products , setProducts  ] = useState([]);
+  useEffect(()=>{
+    async function fetchProducts() {
+      let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");
+      let json = await res.json();
+      setProducts(json)
+    }
+    fetchProducts();
+    const results = Products.filter((e)=>{
+      return e.name.toLowerCase().includes(search);
+    })
+    setResult(results)
+  },[search])
   // If the current path is /Login, don't render the Navbar
   if (location.pathname === '/SignIn' || location.pathname==="/Login") {
     return null;
   }
-  const {userExist , userData , login , setLogin , setUserData , SetUserExist} = useContext(contextProviderInfo)
-
   return (
     <div className='fixed top-0 z-20 '>
       {props.item ?
@@ -31,8 +42,10 @@ export const Navbar = (props) => {
         <Link to="/"><img src={logo} alt="" className='size-20' /></Link>
         </div>
         <div className='relative'>
-        <FaSearch className='absolute text-black top-2 left-3 cursor-pointer text-xl ' />
-        <input type="text" className='w-120 h-8 rounded-2xl outline-none text-black px-12' />
+          <Link to="/Search">
+          <FaSearch className='absolute text-black top-2 left-3 cursor-pointer text-xl ' />
+          </Link>
+        <input type="text" className='w-120 h-8 rounded-2xl outline-none text-black px-12' value={search} onChange={(e)=>setSearch(e.target.value)}/>
         </div>
 
         <div className='flex  gap-2 items-center'>
