@@ -5,8 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 const Cart = () => {
   const [items , setItems ] = useState([]);
-  const {clientdata } = useContext(contextProviderInfo);
-  const [listItems , setListItems ] = useState([]);
+  const {clientdata , listItems , setListItems} = useContext(contextProviderInfo);
   const [deleteThatProduct , setDeleteThatProduct ] = useState();
   const [totalOrder , setTotalOrder ]   = useState(0); 
 

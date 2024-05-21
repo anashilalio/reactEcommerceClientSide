@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect , useContext } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
-import logo from '../../../public/logo.png'
-
+import logo from '../../../public/logo.png';
+import { contextProviderInfo } from '../../context/ContextProvider';
+import axios from 'axios';
 const stripePromise = loadStripe('pk_test_51PHofh091LehQepwcElJoNqFMly6zSMdyKNlJXF1HLYSK2hZg10wLFVdjqrAPZFzOf5n2a5BWAXlzpy53bdKnAYL00I9kfv4I0');
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,6 +36,7 @@ const CheckoutForm = () => {
       console.log('[PaymentMethod]', paymentMethod);
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmit} className='w-full flex flex-col'>
@@ -64,14 +65,19 @@ const CheckoutForm = () => {
         </div>
         
       </div>
-      <button type="submit" disabled={!stripe} className='bg-black rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
-        Pay
-      </button>
+      
     </form>
   );
 };
 
 const Payment = () => {
+  const { listItems , setListItems , clientdata} = useContext(contextProviderInfo);
+  
+  const payed=async()=>{
+    const clientid = clientdata.clientid
+    const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listItems , clientid :clientid})
+    console.log(send)
+  }
   return (
     <div className='mt-20  rounded-2xl shadow-xl px-12 py-4 bg-slate-50 mx-72 flex flex-col items-center'>
       <img src={logo} alt="" className='size-32'/>
@@ -79,7 +85,10 @@ const Payment = () => {
         <CheckoutForm />
       </Elements>
       <div className=''>
-
+      <button type="submit" onClick={()=>payed()} className='bg-black rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
+        Pay
+        
+      </button>
       </div>
     </div>
   );
