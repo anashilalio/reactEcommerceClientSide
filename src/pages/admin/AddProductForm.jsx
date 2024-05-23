@@ -11,6 +11,7 @@ export const AddProductForm = () => {
     const [previewImage, setPreviewImage] = useState(null);
     const [bookDate , setBookDate ] = useState();
     const [createdDate , setCreatedDate ] = useState();
+    const [bookLink , setBookLink ] = useState();
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -23,7 +24,7 @@ export const AddProductForm = () => {
         formData.append('autheur', autheur);
         formData.append('date', bookDate);
         formData.append('createdDate', createdDate);
-
+        formData.append('bookLink', bookLink);
         try {
           const response = await axios.post('http://localhost/ecommerce%20project/admin/addProduct.php', formData, {
             headers: {
@@ -38,6 +39,7 @@ export const AddProductForm = () => {
         setPreviewImage(null)
         setProductname("")
         setPrice(0)
+        setBookLink("");
       };
       useEffect(()=>{
         const getCategories = async()=>{
@@ -97,6 +99,8 @@ export const AddProductForm = () => {
             </select>
             
             <input type="date" name='date' value={bookDate}  onChange={e => setBookDate(e.target.value)} className={inputStyle()} placeholder='date'/>
+            <input type="text" name='link' value={bookLink}  onChange={e => setBookLink(e.target.value)} className={inputStyle()} placeholder='date'/>
+
             
             <textarea type="text" value={description} name='description' onChange={e => setDescription(e.target.value)} className={`h-20 ${inputStyle()} w-full mr-10`} placeholder='description' />
             {/* <label htmlFor="">Price</label> */}

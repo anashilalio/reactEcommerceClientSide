@@ -1,4 +1,4 @@
-import React, { useEffect , useContext } from 'react';
+import React, { useEffect , useContext, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
 import logo from '../../../public/logo.png';
@@ -72,10 +72,17 @@ const CheckoutForm = () => {
 
 const Payment = () => {
   const { listItems , setListItems , clientdata} = useContext(contextProviderInfo);
+  const [listofProducts , setlistofProducts ] = useState([]);
+  
+  useEffect(() => {
+    const productIds = listItems.map(item => parseInt(item.productid));
+    setlistofProducts(productIds);
+  }, [listItems]);
+
   
   const payed=async()=>{
     const clientid = clientdata.clientid
-    const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listItems , clientid :clientid})
+    const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listofProducts , clientid :clientid})
     console.log(send)
   }
   return (

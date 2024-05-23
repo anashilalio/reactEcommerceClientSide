@@ -20,7 +20,7 @@ import Profile from "./pages/client/Profile";
 import Payment from "./pages/client/Payment";
 import Search from "./pages/client/Search";
 function App() {
-  const [isClient , setIsClient ] = useState(true);
+  const [isClient , setIsClient ] = useState(false);
   return (
     <>
 <ContextProviderClient>
