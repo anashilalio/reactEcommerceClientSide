@@ -11,19 +11,20 @@ const Login = () => {
     const {userExist ,login,clientdata , setClientdata  , setLogin , userData , setUserData , SetUserExist} = useContext(contextProviderInfo)
   const [Invalidinput , setInvalidInput] = useState(false);
   const [email , setEmail ] = useState("");
-  const [loading , setLoding ] = useState(true)
+  const [loading , setLoding ] = useState(false)
 
   const navigate = useNavigate(); // Get the navigate object
   
   useEffect(()=>{
     if(login){
       navigate("/")
-    }else{
-      setLogin(false)
     }
-    console.log(login)
+      setLogin(false)
+    
   },[])
   const SignIn = async(e) => {
+    setLoding(false)
+
     e.preventDefault();
     if(!(username === "" || password === "")){
       try{
@@ -34,19 +35,21 @@ const Login = () => {
             password: password
           
         });
-
+        
         if(response.data==="user doesn't exist"){
             console.log("error")
             SetUserExist(false)
             localStorage.removeItem('isLoggedIn')
             
         }else{
-            setUserData(response.data)
+          
             SetUserExist(true)
             setLogin(true)
             localStorage.setItem('isLoggedIn' , 'true')
-            localStorage.setItem('userData' , JSON.stringify(response.data))
-            
+            localStorage.setItem('userData' , JSON.stringify(response.data.clientid))
+            localStorage.setItem('userEmail' , JSON.stringify(response.data.email))  
+
+            navigate("/")
         }
       } catch(error) {
         console.error(error);
@@ -57,7 +60,6 @@ const Login = () => {
       setUsername("");
       setPasswoord("");
     }
-    
   }
   return (
     <>

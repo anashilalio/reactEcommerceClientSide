@@ -2,52 +2,41 @@ import React  ,{useEffect , useState} from 'react'
 import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,BarChart,Bar, ResponsiveContainer,LineChart ,Line } from 'recharts';
 const Charts = () => {
-  const datas = [
-    {
-      name: 'Page A',
-      user: 2,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      user: 5,
-     
-    },
-    {
-      name: 'Page C',
-      user: 2,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      user: 10,
-      pv: 3908,
-      amt: 2000,
-    },
-    
-    
-  ];
+ 
+  const [earning ,setEarning ] = useState();
 const [month , setMonth ] = useState([]);
 const [users , setUsers ] = useState([]);
+const [totalEarning , setTotalEarning]= useState(0);
+const [todayEarning , setTodayEarning]= useState(0);
+
      useEffect(()=>{
         const usersInfo = async ()=>{
             let res = await fetch("http://localhost/ecommerce%20project/admin/Users.php");
             let jsson = await res.json();
-            console.log(jsson)
             const month = jsson.map((user)=>{
               return user.joined.slice(5, 7)
           })
           setMonth(month)
           setUsers(jsson)
         }
+        const products=async()=>{
+          const res = await fetch("http://localhost/ecommerce%20project/admin/orders.php");
+          const resp = await res.json();
+          let monthlyEarnings = resp.monthlyEarnings;
+          let todayEarnings = resp.todaysEarnings;
+
+          let totalEarn = monthlyEarnings.reduce((total, current) => total + Number(current.earnings), 0);
+          let todayEarn = todayEarnings.reduce((total, current) => total + Number(current.earnings), 0);
+          setTotalEarning(totalEarn);
+          setTodayEarning(todayEarn);
+          setEarning(monthlyEarnings);
+          
+        }
+        products();
         usersInfo()
     },[])
-    // const monthJoined = ()=>{
-      
-    // }
-
+   
+console.log(totalEarning)
 const counts = {};
     month.forEach((m) => {
       counts[m] = (counts[m] || 0) + 1;
@@ -65,11 +54,11 @@ const counts = {};
       </LineChart>
     );
     const renderLineCharts = (
-      <LineChart   width={280} height={100} data={datas}>
-        <Line  className='text-black' type="monotone" dataKey="user" stroke="lightblue" />
-                  
-        <Tooltip />
-      </LineChart>
+      <LineChart width={280} height={100} data={earning} >
+      <Line className='text-black' type="monotone" dataKey="earnings" fill="white" stroke='gray' />
+      <XAxis dataKey="month"  fill="orange" stroke='black'/>
+      <Tooltip />
+    </LineChart>
     );
     const renderLineChar = (
       <LineChart   width={280} height={100} data={data}>
@@ -94,17 +83,16 @@ const counts = {};
     <div className='ml-72'>
       <div className='text-3xl  font-mono font-bold mt-8'>hello , Welcome Again</div>
       <div className='sales info mt-12 flex gap-20 text-white text-xl font-mono font-bold  '>
-        <div className="todayEarning bg-gradient-to-r relative from-blue-700 to-blue-500 w-72 h-44 rounded-xl shadow-2xl px-10 py-10">
-          <div className='te text-lg'>total earning</div>
-            <div className='mt-2  text-2xl'>70.00DH</div>
-            <div className='-mt-6 -ml-10'>{renderLineCharts}</div>
+        <div className="todayEarning bg-gradient-to-r relative from-blue-700 to-blue-500 w-72 h-44 rounded-xl shadow-2xl px-10 py-8">
+          <div className='te text-lg index-10'>total earning</div>
+            <div className='  text-2xl'>{totalEarning}DH</div>
+            <div className='-mt-2 -ml-10'>{renderLineCharts}</div>
             <div className='absolute right-20 bottom-20 text-3xl'><FaArrowCircleUp /></div>
 
         </div>
         <div className="todayEarning bg-gradient-to-r bg-opacity-85 relative from-red-700 to-red-500 w-72 h-44 rounded-xl shadow-2xl px-10 py-10">
         <div className='te text-lg'>today earning</div>
-            <div className='mt-2  text-2xl'>10.00DH</div>
-            <div className='-mt-6 -ml-10'>{renderLineChar}</div>
+            <div className='mt-2  text-2xl'>{todayEarning}DH</div>
             <div className='absolute right-20 bottom-20 text-3xl'><FaArrowCircleDown /></div>
 
         </div>
@@ -127,7 +115,6 @@ const counts = {};
 
       </div>
       <div>
-     {console.log(data)}
      <div>
       
      </div>

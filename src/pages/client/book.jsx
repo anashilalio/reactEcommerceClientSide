@@ -26,6 +26,7 @@ const Book = () => {
 
             setLoading(false)
         }
+       
         
 
         bookInfo();
@@ -69,7 +70,7 @@ const Book = () => {
                                     <div className='text-4xl'>{bk.name}</div>
 
                                 </div>
-                                <div className='mt-4 text-orange-500 flex items-center'>
+                                <div className='mt-4 text-blue-500 flex items-center'>
                                     <FaStar />
                                     <FaStar />
                                     <FaStar />
@@ -82,9 +83,9 @@ const Book = () => {
                                 </div>
                                 <div className='text-4xl mt-12 '>{bk.price}.00$</div>
                                 {payeditems.includes(bk.productid)
-                                 ?<div><button onClick={addToCart} className='bg-green-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
-                                    <a href="https://download.booksfree.org/download/28947/?tmstv=1716493091&dlm-dp-dl-force=1&dlm-dp-dl-nonce=4f0053fa5e">Download</a> 
-                                </button>
+                                 ?<div><a href="https://foulabook.com/book/downloading/977795631"><button onClick={addToCart} className='bg-blue-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
+                                    Download
+                                </button></a> 
                                 </div>
                                 : <div><button onClick={addToCart} className='bg-black text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
                                     Add to Cart
@@ -99,7 +100,7 @@ const Book = () => {
                                 
                                 <div>
                                     <div className={`${extend && 'line-clamp-3'} mt-12`}>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis explicabo officia perferendis dolorem? Quasi molestiae cupiditate minima laborum impedit, reprehenderit aliquid ratione eius libero quas soluta nulla magni, quia quam! Iure aliquam perspiciatis tenetur debitis facilis molestiae praesentium iusto nesciunt perferendis soluta velit optio quis, eos totam. Libero est aut quos nihil sed similique, dolorum iste atque asperiores in minima repudiandae! Sint aspernatur numquam animi et voluptatum molestiae magni modi? Beatae impedit fuga possimus in aliquam vitae perferendis voluptas, similique aspernatur quo? Cumque, commodi voluptatibus labore molestias aspernatur ratione architecto enim quae magnam. Impedit tempora labore eius esse tempore. Id, sequi aperiam quia illum iusto sit eligendi. Enim blanditiis itaque ipsa odit molestiae dicta deleniti excepturi suscipit ducimus harum officiis nam esse nesciunt quam cum possimus officia, veniam iure culpa tenetur autem. Mollitia dolorum reiciendis repellat aut cum! A consectetur quos magni incidunt voluptatibus nemo itaque, sapiente officiis commodi doloribus facere, molestias assumenda voluptates! Excepturi pariatur mollitia rerum laboriosam repellendus totam illum esse fugit sunt sapiente harum odio reiciendis enim architecto quasi nesciunt voluptatem quas, quo placeat! Iure, delectus ipsa? Sed blanditiis quo veniam laboriosam quos modi, sunt quasi quod. Nostrum molestiae repellat nam esse sequi modi tempora, et cum?
+                                        {bk.description}
                                     </div>
                                     <button className='w-full mx-auto text-gray-400 '>
                                         {extend ?

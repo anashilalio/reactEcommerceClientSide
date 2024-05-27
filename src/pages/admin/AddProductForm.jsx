@@ -79,7 +79,7 @@ export const AddProductForm = () => {
     <div className='ml-48 '>
         <form onSubmit={handleSubmit} className='flex  items-center space-y-6 flex-wrap  ml-32'>
           {/* <label htmlFor="">image</label> */}
-          <input type="file" name='image' onChange={handleImageChange} accept="image/*" className=' p-2 mt-2 file:rounded-xl file:bg-black file:text-white
+          <input type="file" name='image' onChange={handleImageChange} accept="image/*" className=' p-2 mt-2 file:rounded-xl file:bg-blue-600 file:text-white
           file:border-none file:px-4 file:py-2 file:cursor-pointer hover:file:shadow-xl hover:file:scale-105 ' />
           {previewImage && <img src={previewImage}  className='mr-96 h-56'/>}
           <div className='flex  flex-wrap w-full gap-8'>
@@ -110,7 +110,7 @@ export const AddProductForm = () => {
           </div>
             {/* <label htmlFor="">product Name</label> */}
            
-            <input type="submit"  value='add product' className="bg-black w-72 h-12 rounded-lg text-white cursor-pointer hover:opacity-80 "/>
+            <input type="submit"  value='add product' className="bg-blue-600 w-72 h-12 rounded-lg text-white cursor-pointer hover:opacity-80 "/>
             
         </form>
         

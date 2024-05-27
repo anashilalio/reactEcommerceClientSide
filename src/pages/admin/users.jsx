@@ -1,9 +1,16 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { json } from 'react-router-dom';
+import { FaTrashAlt } from "react-icons/fa";
+import { TiDeleteOutline } from "react-icons/ti";
 
 export const Users = () => {
     const [users , setUsers ] = useState([]);
     const [isLoading , setIsLoading] = useState(true);
+    const [changed , setChanged]= useState(0);
+    const [showConfirmation , setShowConfirmation] = useState(false);
+    const [selectedUser , setSelectedUser ] = useState();
+   
      useEffect(()=>{
         const usersInfo = async ()=>{
             let res = await fetch("http://localhost/ecommerce%20project/admin/Users.php");
@@ -12,14 +19,25 @@ export const Users = () => {
             setIsLoading(false)
         }
         usersInfo()
-    },[])
+    },[changed])
+    
+    const confirmation=(e)=>{
+      setSelectedUser(e);
+      setShowConfirmation(true);
+      
+    }
+    const deleteUser=async(email)=>{
+      const send = await axios.post("http://localhost/ecommerce%20project/admin/DeleteUser.php" ,{email});
+      setChanged(change => change+1);
+
+    }
     return (
-        <div className='ml-56  mt-20'>
+        <div className={`ml-64  mt-20 `}>
     <div className='text-center text-5xl mr-32 mb-12'>USERS</div>
     
 
-    <div className='  shadow-xl mr-20'>
-        <div className=' w-full grid grid-cols-5  px-10 h-10 text-xl font-mono text-white bg-slate-950 h-12 pt-2' >
+    <div className='  shadow-xl mr-20 rounded-lg overflow-hidden'>
+        <div className=' w-full grid grid-cols-5  px-10 h-10 text-xl font-mono text-white bg-blue-600 h-12 pt-2 ' >
             <div>Name</div>
             <div >Password</div>
             <div >Email</div>
@@ -45,8 +63,9 @@ export const Users = () => {
           <div >{user.email}</div>
           <div >{user.joined}</div>
 
-          <div className='bg-red-600 hover:opacity-70 text-white cursor-pointer  rounded-xl  text-center w-24'>Delete</div>
+          <div className=' hover:opacity-70  cursor-pointer  rounded-xl ml-6' onClick={()=>confirmation(user.email)}><FaTrashAlt /></div>
       </div>
+     
   )
 })}
 </div>
@@ -54,26 +73,20 @@ export const Users = () => {
 
 }
     </div>
-    {/* <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-4">User List</h1>
+    {showConfirmation && 
+  <div className='fixed inset-0 bg-black opacity-50' style={{backdropFilter: 'blur(5px)'}}></div>
+}
+    {showConfirmation && 
+        <div className='  absolute top-1/3    bg-gray-100 text-center h-44 w-120 rounded-xl shadow-xl p-4 opacity-100 ' style={{left:"40%"}}>
+          <div className='text-2xl mt-4'>Do you want to delete this user</div>
+          <button className='bg-black text-white px-8 py-2 rounded mt-10 hover:opacity-70' onClick={()=>{deleteUser(selectedUser)
+             setShowConfirmation(false)
+          }}>confirm</button>
+          <div className='w-full h-full relative'><button className='absolute -top-32 text-xl right-0' onClick={()=>setShowConfirmation(false)}><TiDeleteOutline /></button></div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="bg-white shadow rounded-lg p-4">
-        <div class="flex items-center justify-between mb-2">
-          <h2 class="text-lg font-semibold">John Doe</h2>
-          <span class="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded">Admin</span>
         </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div class="font-semibold">Email:</div>
-          <div class="text-gray-600">john.doe@example.com</div>
-          <div class="font-semibold">Joined:</div>
-          <div class="text-gray-600">Jan 1, 2022</div>
-        </div>
-      </div>
-
-      
-    </div>
-  </div> */}
+        
+      }
 </div>
     )
 }

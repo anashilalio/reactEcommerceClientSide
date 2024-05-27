@@ -11,6 +11,8 @@ const Reviews = ({productid}) => {
     const [ clientreview , setClientreview]= useState([])
     const {clientdata } = useContext(contextProviderInfo)
     const [reviews  , setReviews ] = useState([]);
+    const [reviewAdded , setReviewAdded] = useState(0);
+    const [userInfo , setUserInfo] = useState();
     const add =(e)=>{
         e.preventDefault();
         const reviewss = {name : 'name' , review : hover+1 , comment : comment}
@@ -20,19 +22,26 @@ const Reviews = ({productid}) => {
 
     
         const sendReview=async ()=>{
-            const clientid = parseInt(clientdata.clientid); 
-            console.log(clientid)
+            const clientid = parseInt(clientdata); 
+            const date = new Date();
+            const getMonth = date.getMonth();
+            const getYear = date.getFullYear();
+            const getDay = date.getDate();
+            const dat = `${getYear}-${getMonth+1}-${getDay}`;
+            const rate = parseInt(hover)
             const send= await axios.post("http://localhost/ecommerce%20project/client/reviews.php" , {review : comment , 
-                clientid : clientid,productid : productid
+                clientid : clientid,productid : productid , rate : rate , dat : dat
 
              })
              console.log(send)
+             setReviewAdded((e)=>e+1);
         }
         useEffect(()=>{
             const getReviews = async ()=>{
                 const getss = await fetch("http://localhost/ecommerce%20project/client/ClientReview.php");
                 const jssson = await getss.json();
-                 
+
+                setReviews([])
                 jssson.map((e)=>{
                     if(productid === parseInt(e.productid) ){
                         setReviews(p => [...p ,e ]);
@@ -40,12 +49,13 @@ const Reviews = ({productid}) => {
                     }
                 })
             }
+           
             getReviews();
-            console.log(reviews)
             
-        },[clientdata])
-        console.log(reviews)
+        },[reviewAdded])
         
+        
+
   return (
 
         <div className='w-4/5 mx-auto mt-56 '>
@@ -115,7 +125,7 @@ const Reviews = ({productid}) => {
                 </div>
                 <div className='flex flex-col gap-10'>
                    {reviews.map((e)=>{
-                    return <ClientReviews  review={e.comments} />
+                    return <ClientReviews  review={e.comments} name={e.username} rate={e.rate} dat={e.dat}/>
 
                    })} 
                     
@@ -126,11 +136,12 @@ const Reviews = ({productid}) => {
                     {[...Array(5)].map((star ,index)=>{
                         return <>
                         
-                        <FaStar className={`cursor-pointer ${ hover >= index ? 'text-orange-500' : '' }`} onMouseEnter={()=>setHover(index) } />
+                        <FaStar className={`cursor-pointer ${ hover >= index ? 'text-blue-500' : '' }`} onMouseEnter={()=>setHover(index) } />
                         </>
                         
                     })}
                     ({hover+1})
+                    {console.log(hover)}
                     </div>
                     {/* <input type="text" className='w-full outline-none border ' value={name} onChange={(e)=>setName(e.target.value)}/> */}
 

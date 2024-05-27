@@ -16,8 +16,8 @@ const Books = () => {
     <div className='ml-72  '
     >
         <div className='text-center text-6xl my-8'>Books</div>
-    <div className='shadow-2xl  mr-12 mb-12'>
-    <div className='grid grid-cols-5 w-full border-b-2 h-20 align-center pl-12 text-2xl font-mono text-white bg-black'>
+    <div className='shadow-2xl  mr-12 mb-12 rounded-lg overflow-hidden'>
+    <div className='grid grid-cols-5 w-full border-b-2 h-20 align-center pl-12 text-2xl font-mono text-white bg-blue-600'>
                 <div className='flex items-center'>image</div>
                 <div className='flex items-center'>title</div>
                 <div className='flex items-center'>category</div>

@@ -4,6 +4,8 @@ import { CardNumberElement, CardExpiryElement, CardCvcElement, Elements, useStri
 import logo from '../../../public/logo.png';
 import { contextProviderInfo } from '../../context/ContextProvider';
 import axios from 'axios';
+import { FaCheckCircle } from "react-icons/fa";
+
 const stripePromise = loadStripe('pk_test_51PHofh091LehQepwcElJoNqFMly6zSMdyKNlJXF1HLYSK2hZg10wLFVdjqrAPZFzOf5n2a5BWAXlzpy53bdKnAYL00I9kfv4I0');
 
 const CheckoutForm = () => {
@@ -73,6 +75,8 @@ const CheckoutForm = () => {
 const Payment = () => {
   const { listItems , setListItems , clientdata} = useContext(contextProviderInfo);
   const [listofProducts , setlistofProducts ] = useState([]);
+  const [isPayed , setIsPayed ] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   
   useEffect(() => {
     const productIds = listItems.map(item => parseInt(item.productid));
@@ -86,18 +90,34 @@ const Payment = () => {
     console.log(send)
   }
   return (
-    <div className='mt-20  rounded-2xl shadow-xl px-12 py-4 bg-slate-50 mx-72 flex flex-col items-center'>
+    <div className='relative'>
+<div className='mt-20  rounded-2xl shadow-xl px-12 py-4 bg-slate-50 mx-72 flex flex-col items-center'>
       <img src={logo} alt="" className='size-32'/>
       <Elements stripe={stripePromise} >
         <CheckoutForm />
       </Elements>
       <div className=''>
-      <button type="submit" onClick={()=>payed()} className='bg-black rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
+      <button type="submit" onClick={()=>{payed();setShowSuccess(true)}} className='bg-blue-500 rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
         Pay
         
       </button>
       </div>
+      <div>
+     
+      </div>
+      
     </div>
+    {
+      showSuccess &&
+    <div className='absolute right-12 top-0 w-54 shadow-xl h-24 py-8 px-4 flex items-center gap-4'>
+    <FaCheckCircle className='text-green-400'/>
+     successfull Paiment
+
+    </div>
+    }
+    
+    </div>
+    
   );
 };
 
