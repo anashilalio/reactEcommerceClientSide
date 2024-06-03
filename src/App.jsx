@@ -19,6 +19,8 @@ import Book from "./pages/client/book";
 import Profile from "./pages/client/Profile";
 import Payment from "./pages/client/Payment";
 import Search from "./pages/client/Search";
+import Reviews from "./pages/admin/Reviews";
+
 function App() {
   const [isClient , setIsClient ] = useState(true);
   return (
@@ -53,6 +55,8 @@ function App() {
           <Route path="/addCategorie" element={<AddCategorie/>}/>
           <Route path="/Books" element={<Books/>}/>
           <Route path="/categories" element={<Categories/>}/>
+          <Route path="/Reviews" element={<Reviews />}/>
+
           <Route path="/" element={<Charts/>}/>
           
 

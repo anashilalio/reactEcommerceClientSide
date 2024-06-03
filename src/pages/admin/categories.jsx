@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaTrashAlt } from "react-icons/fa";
 import { PiNotePencilBold } from "react-icons/pi";
+import { DataGrid ,GridToolbar } from '@mui/x-data-grid';
+import Box from '@mui/material/Box';
 
 const categories = () => {
     const  [categoriesList  ,setCategoriesList ] = useState([]);
@@ -16,39 +18,87 @@ const categories = () => {
         
 
     },[change])
-    const deleteCategorie = async(name)=>{
-        let response = await axios.post("http://localhost/ecommerce%20project/admin/deleteCategorie.php" ,{name}) ;
-        console.log(response.data)
-        setChange(change+1);
-    }
     
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        {
+          field: 'categorie',
+          headerName: 'name',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'NProducts',
+          headerName: 'Last name',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'description',
+          headerName: 'description',
+          type: 'number',
+          width: 150,
+          editable: true,
+        },
+        {
+            field: 'dat',
+            headerName: 'Age',
+            type: 'number',
+            width: 110,
+            editable: true,
+          },{
+            field: 'delete',
+            headerName: 'Delete',
+            sortable: false,
+            width: 150,
+            disableClickEventBubbling: true,
+            renderCell: (params) => {
+              const onClick = async() => {
+                const name = params.row.categorie;
+                let response = await axios.post("http://localhost/ecommerce%20project/admin/deleteCategorie.php" ,{name}) ;
+                console.log(response.data)
+                setChange(change+1);
+              };
+        
+              return <button onClick={onClick}><FaTrashAlt /></button>;
+            },
+          },
+        
+      ];
+      
+      
+      const rows = categoriesList.map((e, index) => ({ ...e, id: index }));
+      console.log(categoriesList)
   return (
-    <div className='ml-72 mr-12 mt-12 '>
-        <div className='text-6xl mb-12 text-center'>Categories</div>
-        <div className='shadow-2xl '>
-        <div className='grid grid-cols-4 h-12 border-b-2 text-white bg-blue-600 text-3xl '>
-            <div className='ml-12'>name</div>
-           <div>description</div>
-           <div>Number of books</div>
-           <div>modify</div>
-
-
-        </div>
-        {categoriesList.map((cat)=>{
-            return <div className='grid grid-cols-4 h-12 border-b-2 pt-2 hover:bg-gray-50 '>
-                <div className='ml-12 font-mono text-xl'>{cat.categorie}</div>
-                <div className=' line-clamp-1 text-wrap'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nihil excepturi labore quod sapiente repellendus voluptatem eaque laborum veritatis? Iusto facilis iste et necessitatibus illum quo laudantium excepturi illo quos.</div>
-                <div className='text-2xl text-center'>123</div>
-                <div><button className=' px-4 py-1 rounded-xl text-black hover:text-blue-500'><PiNotePencilBold /></button>
-                <button  className=' px-4 py-1 rounded-xl text-black hover:text-blue-500'
-                 onClick={()=>deleteCategorie(cat.categorie)}><FaTrashAlt /></button></div>
-            </div>
-        })} 
-        </div>
+    <div className='pl-96 pr-12 pt-12 bg-gray-50 h-screen'>
+        <div className="w-full flex justify-end "><button className='px-6 bg-blue-500 text-white rounded-xl py-2 mb-4 mr-28 ' >Add</button></div>
+        
+        <Box sx={{ height: 400, width: '90%' }} className="shadow-lg">
+      <DataGrid
+        rows={rows}
+        disableColumnFilter
+        disableColumnSelector
+        disableDensitySelector
+        columns={columns}
+        initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+        slots={{ toolbar: GridToolbar }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+          },
+        }}
+        pageSizeOptions={[5]}
+        
+      />
+    </Box>
         
         
-        
-       
         
     </div>
   )

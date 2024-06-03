@@ -2,11 +2,15 @@ import React, { useEffect ,useContext, useState } from 'react'
 import defaultPhoto from '../../../public/defaultProfile.webp'
 import { contextProviderInfo } from '../../context/ContextProvider'
 import axios from 'axios'
+import { IoMdPhotos } from "react-icons/io";
+
 const Profile = () => {
     const {clientdata   ,login } = useContext(contextProviderInfo)
     const [wishlist , setWishlist ] = useState([]);
     const [image,setImage ] = useState();
     const [user , setUser ] = useState();
+    const [change , setChange ] = useState();
+    const [previewImage , setPreviewImage ] = useState();
    useEffect(()=>{
     const getwishlist =async()=>{
         const clientid = parseInt(clientdata.clientid); 
@@ -18,7 +22,7 @@ const Profile = () => {
             const resp = await responses.json();
             return resp.find(element => element.productid === i.productid);
           });
-        const respon = await fetch("http://localhost/ecommerce%20project/admin/Users.php")
+        const respon = await fetch("http://localhost/ecommerce%20project/admin/usersList.php")
         const users = await respon.json();
         const userr = users.filter((e)=>parseInt(e.clientid) === parseInt(clientdata))
         console.log(userr)
@@ -32,6 +36,7 @@ const Profile = () => {
    },[clientdata])
    const SubmitFile =(e)=>{
     setImage(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]))
        console.log(e.target.files[0])
    }
    const changePhoto=async()=>{
@@ -46,16 +51,26 @@ const Profile = () => {
           })
           
    }
+   console.log(change)
   return (
-    <div className='mt-16  shadow-2xl h-72 rounded-2xl flex w-full'>
-        <div className='shadow-xl p-4 flex flex-col items-center'>
-        <img src={`http://localhost/ecommerce%20project/client/${user}`} className='size-24 rounded-full ' alt="" />
+    <div className='mt-16  shadow-2xl rounded-2xl flex w-full'>
+        <div className='shadow-xl p-4 flex flex-col items-center'  >
+            <div className= {`relative size-24 ${change && 'opacity-35'}`} onMouseEnter={(e)=>setChange(true)} onMouseLeave={(e)=>setChange(false)}>
+                {previewImage ? 
+                   <img src={previewImage} className='size-24 rounded-full '  onMouseEnter={(e)=>setChange(true)} />
+
+                :                     <img src={`http://localhost/ecommerce%20project/client/${user}`} className='size-24 rounded-full '  onMouseEnter={(e)=>setChange(true)} />
+
+            }
+            {change &&            <label  className='absolute top-6 left-6 cursor-pointer'htmlFor='fileUp' ><IoMdPhotos className='size-12 text-white' />
+        </label>}
+            </div>
         <div className='text-2xl '>{clientdata.username}</div>
         <div className='text-sm text-gray-300 '>{clientdata.email}</div>
         <div className=' whitespace-nowrap -ml-2 mt-8 bg-black rounded-xl text-white px-3 cursor-pointer w-44 text-center'>change password</div>
-        <label htmlFor="fileUp" className='mt-4 border w-full text-center rounded-3xl cursor-pointer' >Change Photo</label>
+        
         <input type="file" id='fileUp' className=' hidden' onChange={SubmitFile}/>
-        <div onClick={()=>changePhoto()}>submit</div>
+        <div onClick={()=>changePhoto()} className=' bg-blue-500 text-white px-8 mt-4 rounded-xl cursor-pointer'>submit</div>
         </div>
         <div className='  w-full '>
             

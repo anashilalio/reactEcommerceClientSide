@@ -15,6 +15,11 @@ export default {
         "130" : "30rem",
         '90p': '90%',
       },
+      left:{
+        "120" : "26rem",
+        "130" : "30rem",
+        '90p': '90%',
+      },
       animation: {
         bounce200: 'bounce 1s infinite 200ms',
         spin: 'spin 1s linear infinite',

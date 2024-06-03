@@ -83,12 +83,18 @@ const Payment = () => {
     setlistofProducts(productIds);
   }, [listItems]);
 
-  
+  console.log(clientdata)
   const payed=async()=>{
-    const clientid = clientdata.clientid
-    const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listofProducts , clientid :clientid})
+    const clientid = clientdata;
+    const dat = new Date();
+    const getMonth = dat.getMonth();
+    const getYear = dat.getFullYear();
+    const getDay = dat.getDate();
+    const datt = `${getYear}-${getMonth+1}-${getDay}`;
+    const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listofProducts , clientid :clientid , datt :datt})
     console.log(send)
   }
+ 
   return (
     <div className='relative'>
 <div className='mt-20  rounded-2xl shadow-xl px-12 py-4 bg-slate-50 mx-72 flex flex-col items-center'>
@@ -97,7 +103,7 @@ const Payment = () => {
         <CheckoutForm />
       </Elements>
       <div className=''>
-      <button type="submit" onClick={()=>{payed();setShowSuccess(true)}} className='bg-blue-500 rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
+      <button type="submit" onClick={()=>payed()} className='bg-blue-500 rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
         Pay
         
       </button>

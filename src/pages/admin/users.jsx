@@ -13,7 +13,7 @@ export const Users = () => {
    
      useEffect(()=>{
         const usersInfo = async ()=>{
-            let res = await fetch("http://localhost/ecommerce%20project/admin/Users.php");
+            let res = await fetch("http://localhost/ecommerce%20project/admin/usersList.php");
             let jsson = await res.json();
             setUsers(jsson)
             setIsLoading(false)
@@ -32,12 +32,13 @@ export const Users = () => {
 
     }
     return (
-        <div className={`ml-64  mt-20 `}>
+        <div className={`pl-64  pt-20 bg-gray-50`}>
     <div className='text-center text-5xl mr-32 mb-12'>USERS</div>
     
 
-    <div className='  shadow-xl mr-20 rounded-lg overflow-hidden'>
-        <div className=' w-full grid grid-cols-5  px-10 h-10 text-xl font-mono text-white bg-blue-600 h-12 pt-2 ' >
+    <div className='   mr-20 rounded-lg overflow-hidden bg-gray-50 space-y-4'>
+        <div className=' w-full grid grid-cols-6  px-10 h-10 text-xl font-mono text-white bg-blue-600 h-12 pt-2 rounded-xl' >
+        <div>photo</div>
             <div>Name</div>
             <div >Password</div>
             <div >Email</div>
@@ -54,16 +55,19 @@ export const Users = () => {
     <span class="sr-only">Loading...</span>
 </div>
 :
-<div>
+<div className='space-y-4'>
 {users.map((user) => {
   return (
-      <div key={user.id} className='grid grid-cols-5 border-y w-full py-4 px-10 '>
-          <div >{user.username}</div>
-          <div >{user.pswd}</div>
-          <div >{user.email}</div>
-          <div >{user.joined}</div>
+      <div key={user.id} className='grid grid-cols-6 shadow w-full py-4 px-10 rounded-xl bg-white '>
+          <div ><img src={`http://localhost/ecommerce%20project/client/${user.photo}`}  className='size-12 rounded-full' alt="" /></div>
+          <div className='mt-2'>{user.username}</div>
+          <div className='mt-2'>{user.pswd}</div>
+          <div className='mt-2'>{user.email}</div>
+          <div className='mt-2'>{user.joined}</div>
 
-          <div className=' hover:opacity-70  cursor-pointer  rounded-xl ml-6' onClick={()=>confirmation(user.email)}><FaTrashAlt /></div>
+          <div className=' hover:opacity-70  cursor-pointer  rounded-xl ml-6 mt-2' onClick={()=>confirmation(user.email)}>
+            <FaTrashAlt />
+            </div>
       </div>
      
   )

@@ -11,7 +11,7 @@ const AllProducts = () => {
     const [wishlistProductId , setWishlistProductId ] = useState() // separate state for wishlist product ID
     const [cartProductId , setCartProductId ] = useState() // separate state for cart product ID
     const {clientdata } = useContext(contextProviderInfo)
-    const clientid = parseInt(clientdata.clientid);
+    const clientid = parseInt(clientdata);
     useEffect(() => {
         async function fetchProducts() {
           let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");

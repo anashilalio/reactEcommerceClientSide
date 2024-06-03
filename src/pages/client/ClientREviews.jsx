@@ -2,12 +2,12 @@ import React from 'react'
 import defaultPhoto from '../../../public/defaultProfile.webp'
 import { FaStar } from "react-icons/fa";
 
-const ClientREviews = ({review , name ,rate ,dat}) => {
+const ClientREviews = ({review , name ,rate ,dat,photo}) => {
     return (
         <div className='shadow-md rounded-xl py-4 px-4 bg-gray-50'>
             <div className=' '>
                 <div className='flex gap-8 items-center'>
-                    <img src={defaultPhoto} alt="" className='size-10 rounded-full h-full' />
+                    <img src={`http://localhost/ecommerce%20project/client/${photo}`}  alt="" className='size-10 rounded-full h-full' />
                     <div className='text-2xl'>
                         {name}
                         <div>

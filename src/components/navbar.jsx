@@ -21,6 +21,7 @@ export const Navbar = (props) => {
   const {  setResult,search , setSearch , login , setLogin ,clientdata } = useContext(contextProviderInfo)
   const [Products , setProducts  ] = useState([]);
   const [image , setImage ] = useState();
+  console.log(image)
   useEffect(()=>{
     async function fetchProducts() {
       let res = await fetch("http://localhost/ecommerce%20project/client/Product.php");
@@ -33,7 +34,7 @@ export const Navbar = (props) => {
       return e.name.toLowerCase().includes(search);
     })
     const getImage=async()=>{
-      const respon = await fetch("http://localhost/ecommerce%20project/admin/Users.php")
+      const respon = await fetch("http://localhost/ecommerce%20project/admin/usersList.php")
       const users = await respon.json();
       const userr = users.filter((e)=>parseInt(e.clientid) === parseInt(clientdata))
       console.log(userr)
@@ -49,7 +50,7 @@ export const Navbar = (props) => {
   }
   console.log(image)
   return (
-    <div className='fixed top-0 z-20 '>
+    <div className='fixed top-0 z-20 overflow-hidden'>
       {props.item ?
       <div className='bg flex gap-4 justify-between px-6 h-16 items-center  w-screen bg-white shadow' >
         <div>
@@ -99,7 +100,7 @@ export const Navbar = (props) => {
         <Link to="/categories"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategoryAlt/>categories</Link>
         <Link to='/addProductForm'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdAddCircle />Add Book</Link>
         <Link to='/Books'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><FaBook />Books</Link>
-        <Link to='/addProductForm'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdOutlineReviews />Reviews</Link>
+        <Link to='/Reviews'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdOutlineReviews />Reviews</Link>
 
 
 

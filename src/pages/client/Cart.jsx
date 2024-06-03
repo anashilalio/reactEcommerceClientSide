@@ -14,7 +14,7 @@ const Cart = () => {
       const response = await fetch("http://localhost/ecommerce%20project/client/getCartItems.php");
       const carttt = await response.json();
       const promises = carttt.map(async (i) => {
-        if (clientdata.clientid === i.clientid) {
+        if (clientdata === i.clientid) {
           const response = await fetch("http://localhost/ecommerce%20project/client/Product.php");
           const res = await response.json();
           return res.find(product => product.productid === i.productid);

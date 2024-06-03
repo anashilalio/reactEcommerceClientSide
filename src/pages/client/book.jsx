@@ -13,6 +13,7 @@ const Book = () => {
     const [extend, setExtend] = useState(false);
     const {clientdata } = useContext(contextProviderInfo);
     const [payeditems , setPayedimtes ] = useState();
+    const [reviews , setReviews ] = useState();
     useEffect(() => {
         
         const bookInfo = async () => {
@@ -27,8 +28,12 @@ const Book = () => {
             setLoading(false)
         }
        
-        
-
+        const bookRate=async()=>{
+            const response = await fetch("http://localhost/ecommerce%20project/client/bookRate.php");
+            const res  = await response.json();
+            setReviews(res)
+        }
+        bookRate();
         bookInfo();
 
     }, [])
@@ -36,7 +41,7 @@ const Book = () => {
     const filterBook = bookI.filter(e => e.name === book);
     
         const addToCart = async ()=>{
-            const clientid = parseInt(clientdata.clientid);
+            const clientid = parseInt(clientdata);
             const productid = parseInt(filterBook[0].productid);
             console.log(productid)
             const response = await axios.post("http://localhost/ecommerce%20project/client/cart.php" ,{clientid ,productid: productid} ) ;
@@ -57,6 +62,7 @@ const Book = () => {
                 :
                 <div>       
     {filterBook.map((bk) => {
+        const filterReview = reviews.filter((e)=>e.productid === bk.productid)
                     return <>
                         <div className='ml-20 flex gap-4 mb-12'>
                             <div>
@@ -70,20 +76,21 @@ const Book = () => {
                                     <div className='text-4xl'>{bk.name}</div>
 
                                 </div>
-                                <div className='mt-4 text-blue-500 flex items-center'>
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                    <div className='text-black'>
-                                        (1)
-                                    </div>
+                                <div className='mt-4  flex items-center'>
+                                {
+  filterReview && filterReview.length > 0 ?
+  <div className='flex'>{[...Array(5)].map((e , index)=>{return <FaStar className={`${filterReview[0].rate>index && 'text-blue-500'}`}/>})}</div>
+  :
+  <div className='flex'>{[...Array(5)].map((e , index)=>{return <FaStar/>})}</div>
+}
+<div className='text-black'>
+  {filterReview && filterReview.length > 0 ? filterReview[0].rate : '0.0'}
+</div>
 
                                 </div>
                                 <div className='text-4xl mt-12 '>{bk.price}.00$</div>
                                 {payeditems.includes(bk.productid)
-                                 ?<div><a href="https://foulabook.com/book/downloading/977795631"><button onClick={addToCart} className='bg-blue-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
+                                 ?<div><a href={bk.link}><button onClick={addToCart} className='bg-blue-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
                                     Download
                                 </button></a> 
                                 </div>

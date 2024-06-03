@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { IoImagesSharp } from "react-icons/io5";
+
 export const AddProductForm = () => {
     const [name , setProductname] = useState("");
     const [description, setDescription] = useState('');
@@ -12,6 +14,7 @@ export const AddProductForm = () => {
     const [bookDate , setBookDate ] = useState();
     const [createdDate , setCreatedDate ] = useState();
     const [bookLink , setBookLink ] = useState();
+    const [imageBeinghover , setImageBeingHover] =useState(false); 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -72,20 +75,25 @@ export const AddProductForm = () => {
         console.log(previewImage)
     }
     const inputStyle = ()=>{
-     return 'w-130 h-10 outline-none border-b-2'
+     return 'w-130 h-10 outline-none border-b-2 rounded-xl px-4 py-2'
     }
+    
 
   return (
     <div className='ml-48 '>
-        <form onSubmit={handleSubmit} className='flex  items-center space-y-6 flex-wrap  ml-32'>
-          {/* <label htmlFor="">image</label> */}
-          <input type="file" name='image' onChange={handleImageChange} accept="image/*" className=' p-2 mt-2 file:rounded-xl file:bg-blue-600 file:text-white
-          file:border-none file:px-4 file:py-2 file:cursor-pointer hover:file:shadow-xl hover:file:scale-105 ' />
-          {previewImage && <img src={previewImage}  className='mr-96 h-56'/>}
-          <div className='flex  flex-wrap w-full gap-8'>
-          
+        <form onSubmit={handleSubmit} className='flex  items-center space-y-6 flex-wrap  pl-32 pt-12 bg-gray-50'>
 
-          <input type="text" value={name} name='name' onChange={e => setProductname(e.target.value)} className={inputStyle()} placeholder='title'/>
+          {/* <label htmlFor="">image</label> */}
+          <label htmlFor="ProductUp" className='relative border w-44 rounded-xl shadow-lg bg-white h-56  mr-8 cursor-pointer overflow-hidden hover:text-white hover:bg-black hover:bg-opacity-25'>
+            {imageBeinghover && <div className={`absolute top-16 left-10 text-xl text-black z-10`} onMouseEnter={()=>setImageBeingHover(true)}><IoImagesSharp className='size-24'/></div>}
+            {previewImage ? <img src={previewImage}  className={`size-full ${imageBeinghover && 'opacity-50'}`} onMouseEnter={()=>setImageBeingHover(true)} onMouseLeave={()=>setImageBeingHover(false)}/>:<IoImagesSharp className='size-24 mx-auto mt-14'/>}
+            </label>
+          <input type="file" id='ProductUp' name='image' onChange={handleImageChange} accept="image/*" className='hidden' />
+          
+          <div className='flex  flex-wrap w-full gap-8'>
+
+          <input type="text" value={name} name='name' onChange={e => setProductname(e.target.value)} className={`${inputStyle()}`} placeholder='title'/>
+
             {/* <label htmlFor="">description</label> */}
             <input type="text" name='autheur' value={autheur}  onChange={e => setAutheur(e.target.value)} className={inputStyle()} placeholder='auteur'/>
             <input type="number" name='price' value={price}  onChange={e => setPrice(e.target.value)} className={inputStyle()} placeholder='price'/>
@@ -99,7 +107,7 @@ export const AddProductForm = () => {
             </select>
             
             <input type="date" name='date' value={bookDate}  onChange={e => setBookDate(e.target.value)} className={inputStyle()} placeholder='date'/>
-            <input type="text" name='link' value={bookLink}  onChange={e => setBookLink(e.target.value)} className={inputStyle()} placeholder='date'/>
+            <input type="text" name='link' value={bookLink}  onChange={e => setBookLink(e.target.value)} className={inputStyle()} placeholder='Link'/>
 
             
             <textarea type="text" value={description} name='description' onChange={e => setDescription(e.target.value)} className={`h-20 ${inputStyle()} w-full mr-10`} placeholder='description' />
