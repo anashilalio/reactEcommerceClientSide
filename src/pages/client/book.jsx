@@ -47,7 +47,7 @@ const Book = () => {
             const response = await axios.post("http://localhost/ecommerce%20project/client/cart.php" ,{clientid ,productid: productid} ) ;
             console.log(response)
         }
-        
+        console.log(filterBook)
       
     return (
         <div className='mt-28'>

@@ -13,7 +13,8 @@ const Reviews = () => {
     },[])
   return (
     <div className='pl-64 bg-gray-50'>
-        Reviews
+        <div className='text-5xl text-center'>Reviews</div>
+        
         <div className='flex flex-wrap justify-around'>
         {reviews.map((review)=>{
             return <div className='mb-4 shadow-xl p-5 w-120 h-56 rounded-xl bg-white'>

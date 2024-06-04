@@ -7,14 +7,14 @@ import BestBooks from '../../components/BestBooks'
 import CustomersReviews from '../../components/customerReviews'
 import AboutUs from '../../components/AboutUs'
 import Footer from '../../components/footer'
-
+import WhyUs from './whyUs'
 export const Home = () => {
   return (
     <div className='overflow-x-hidden'>
      
       <Hero />
-      <Categories />
       <BestBooks />
+      <WhyUs />
       <CustomersReviews />
       <AboutUs />
       <Footer />

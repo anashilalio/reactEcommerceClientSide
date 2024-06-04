@@ -48,11 +48,25 @@ export const Navbar = (props) => {
   if (location.pathname === '/SignIn' || location.pathname==="/Login") {
     return null;
   }
+  const [scrolled, setScrolled] = React.useState(false);
+
+React.useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 150);
+  };
+
+  document.addEventListener('scroll', handleScroll);
+  return () => {
+    // Clean up the event listener
+    document.removeEventListener('scroll', handleScroll);
+  };
+}, []); 
+
   console.log(image)
   return (
     <div className='fixed top-0 z-20 overflow-hidden'>
       {props.item ?
-      <div className='bg flex gap-4 justify-between px-6 h-16 items-center  w-screen bg-white shadow' >
+      <div className={`bg flex gap-4 justify-between px-6 h-16 items-center  w-screen  shadow  ${scrolled ? 'bg-white' : 'bg-transparent'}`} >
         <div>
         <Link to="/"><img src={logo} alt="" className='size-44 mt-6 -ml-4' /></Link>
         </div>
@@ -96,7 +110,6 @@ export const Navbar = (props) => {
         <div className='flex  gap-6 flex-col -mt-4 '>
         <Link to='/'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><RiHome2Fill />dashboard</Link>
         <Link to='/Users'  className=' hover:opacity-80 px-4 py-1 rounded-lg flex items-center gap-2'><FaUser />Users</Link>
-        <Link to="/addCategorie"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategory/>addCategorie</Link>
         <Link to="/categories"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><BiSolidCategoryAlt/>categories</Link>
         <Link to='/addProductForm'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><MdAddCircle />Add Book</Link>
         <Link to='/Books'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><FaBook />Books</Link>
