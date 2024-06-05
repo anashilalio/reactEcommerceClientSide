@@ -4,11 +4,10 @@ import { FaUser } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdAddCircle } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
-import logo from '../../public/logo.png';
-import logoDashboard from '../../public/logoBlack.png'
+import logo from '../../public/textLogo.png';
+import logoDashboard from '../../public/textLogo.png'
 
 import { FaShoppingCart } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
 import { MdOutlineReviews } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
@@ -66,28 +65,26 @@ React.useEffect(() => {
   return (
     <div className='fixed top-0 z-20 overflow-hidden'>
       {props.item ?
-      <div className={`bg flex gap-4 justify-between px-6 h-16 items-center  w-screen  shadow  ${scrolled ? 'bg-white' : 'bg-transparent'}`} >
+      <div className={`bg flex gap-4 justify-between px-6 h-16 items-center  w-screen  shadow text-xl font-bold ${scrolled ? 'bg-white' : 'bg-transparent'}`} >
         <div>
-        <Link to="/"><img src={logo} alt="" className='size-44 mt-6 -ml-4' /></Link>
+        <Link to="/"><img src={logo} alt="" className=' h-8 ' /></Link>
         </div>
         <div className='relative'>
-          <Link to="/Search">
-          <FaSearch className='absolute text-black top-2 left-3 cursor-pointer text-xl ' />
-          </Link>
-        <input type="text" className='w-120 h-8 rounded-2xl outline-none text-black px-12 border' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <Link to='categorie'  className='hover:text-green-500 px-4 py-1 rounded-lg hover:opacity-80'>
+        Categorie
+        </Link>
+        <Link to="/ContactUs" className='hover:text-green-500 px-4 py-1 rounded-lg hover:opacity-80'>ContactUs</Link>
+
         </div>
 
         <div className='flex  gap-2 items-center'>
         <br />
-        <Link to='categorie'  className='hover:text-blue-500 px-4 py-1 rounded-lg hover:opacity-80'>
-        Categorie
-        </Link>
-        <Link to="/ContactUs" className='hover:text-blue-500 px-4 py-1 rounded-lg hover:opacity-80'>ContactUs</Link>
-        <Link to="/cart" className='hover:text-blue-500  px-4 py-1 rounded-lg hover:opacity-80 ml-20'><FaShoppingCart /></Link>
+        
+        <Link to="/cart" className='hover:text-green-500  px-4 py-1 rounded-lg hover:opacity-80 ml-20'><FaShoppingCart /></Link>
         {login ?
         <>
            <Link to="/profile"  className='hover:text-blue-500  px-4 py-1 rounded-lg hover:opacity-80 text-3xl overflow-hidden'><img className='size-10 rounded-full shadow-xl' src={`http://localhost/ecommerce%20project/client/${image}`}  alt="" /></Link>
-        <button   className='hover:text-blue-500  px-4 py-1 rounded-lg hover:opacity-80 text-xl' onClick={()=>{setLogin(localStorage.setItem('isLoggedIn' , 'false'));}}>logout</button>
+        {/* <button   className='hover:text-blue-500  px-4 py-1 rounded-lg hover:opacity-80 text-xl' onClick={()=>{setLogin(localStorage.setItem('isLoggedIn' , 'false'));}}>logout</button> */}
         </>
        
 

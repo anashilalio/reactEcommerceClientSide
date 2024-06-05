@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 
-
-/* body , html{
-    background-color: #212121;
-    color: white;
-} */
+@font-face{
+    font-family: 'ultra';
+    src: url(../public/Ultra-Regular.ttf) format('truetype');
+}
+.ultra{
+    font-family: 'utlra';
+}
