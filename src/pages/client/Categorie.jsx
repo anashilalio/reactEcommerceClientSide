@@ -3,6 +3,8 @@ import CategorieType from './CategorieType';
 import { Link } from 'react-router-dom';
 import ContextProviderClient, { contextProviderInfo } from '../../context/ContextProvider';
 import AllProducts from './AllProducts';
+import { FaSearch } from "react-icons/fa";
+
 const Categorie = () => {
     const [categories , setCategories ] = useState([{}]);
     const [loading , setLoading] = useState(true);
@@ -20,6 +22,7 @@ const Categorie = () => {
     console.log("categorie : ", categories)
   return (
     <div>
+      
       {loading ?
      <div role="status" className=' flex justify-center  items-center bg-black h-screen '>
      <svg aria-hidden="true"  class="w-20 h-20 text-center text-gray-200 animate-spin dark:text-gray-600 fill-gray-300"  viewBox="0 0 100 101" fill="none"  >
@@ -29,8 +32,19 @@ const Categorie = () => {
      <span class="sr-only">Loading...</span>
  </div> 
     :
-    <div>
+    <div className='w-full'>
+      <div className='flex justify-center mt-20  w-full relative' > 
+        <div className='relative w-2/4 ml-20'>
+        <input type="text" className='w-full h-12 outline-none rounded-full border px-6 shadow' />
+
+<Link to="/Search" >
+    <FaSearch className='absolute top-2 right-6  cursor-pointer text-3xl ' />
+    </Link>
+        </div>
+        
+      </div>
       <div className='w-64 shadow-md fixed top-16 h-screen space-y-8 '>
+      
       <div className='mt-16'>
       <Link to='/categorie' onClick={()=>setCurrentCtg(null)} className='ml-10  mt-20   cursor-pointer hover:opacity-70 text-lg font-mono'>recent BOOKS</Link>
       </div>

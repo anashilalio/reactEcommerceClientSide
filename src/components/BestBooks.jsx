@@ -6,67 +6,43 @@ import { color } from 'framer-motion';
 import { all } from 'axios';
 import { MdNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
+import { FaCircle } from "react-icons/fa6";
 
 const BestBooks = () => {
-    
-    const [card  , setcard] = useState(0);
+ 
 
-    const BestSellers = ({images , title})=>{
-        return(
-            <div className={`h-auto w-64  duration-200 cursor-pointer shrink-0`} >
-                <img src={images} alt="" className=' h-72 w-full'/>
-                
-            </div>
-        )
-    }
-    const cardWidth = 120;
- const gap = 30;
-const cardsInView =6;
-const totalWidth = (cardWidth + gap) * cardsInView;
-    const next =  ()=>{
-        if (card < totalWidth * (books.length / cardsInView - 1)) {
-            setcard(prevCard => prevCard + 2*(cardWidth +gap) );
-          }
-          console.log(card)
-    }
-    const prev =  ()=>{
-        if(card>=cardWidth + gap){
-            setcard(e=>e-2*(cardWidth + gap))
-               
-        
-        }
-   }
-   const books= [
-    {images : habits ,  title :"7 habits of effective people" },
-    {images : digitalMinimalism ,  title :"7 habits of effective people" },
-    {images : deepwork ,  title :"7 habits of effective people" },
-    {images : digitalMinimalism ,  title :"7 habits of effective people" },
-    {images : deepwork ,  title :"7 habits of effective people" },
-    {images : habits ,  title :"7 habits of effective people" },
-    {images : digitalMinimalism ,  title :"7 habits of effective people" },
-    {images : deepwork ,  title :"7 habits of effective people" },
-    {images : habits ,  title :"7 habits of effective people" },
-    {images : digitalMinimalism ,  title :"7 habits of effective people" },
-
-
-]
     return (
-        <div  className='space-y-12 mt-4 font-mono font-extrabold relative'>
-            <div className="bestBooks text-5xl text-center"> Meilleure vente </div>
+        <div  className='space-y-12 mt-4 font-mono font-extrabold   h-screen mx-16 rounded-2xl flex
+        justify-center  gap-12 items-center relative
+        '>
+            <div className='absolute text-6xl top-3 flex gap-6'>Best Sellers 
+            <p className=' text-white bg-green-500 rounded px-2 '>Books</p> 
             
-            <button onClick={prev} className='absolute top-44 text-5xl left-44 z-10  bg-blue-500 text-white  rounded-full'><GrFormPrevious /></button>
-            <div className=' flexustify-center overflow-hidden mx-auto ' style={{width:`${(cardWidth +gap) * cardsInView }px` }}>
-            <div className='pl-4 flex gap-12' style={{transform:`translateX(-${card}px)` , transition:'all 2s'}}>
-                {books.map((book)=>{
-                        return <BestSellers images={book.images} title={book.title}/>
+            </div>
+            <button className='bg-gradient-to-r from-green-400 to-green-600 rounded-full mt-10 cursor-pointer shadow-lg 
+            hover:opacity-70'><GrFormPrevious className='size-12 text-white' /></button>
+  
+          <div>
+             <img src={habits} alt="" className='rounded-xl h-96 w-72 shadow-xl' />   
+        </div>  
+        <div className='w-96 space-y-10'>
+            <div className='text-3xl'>
+            The 7 Habits of Highly Effective People 
+            </div>
+            <div>
+            The 7 Habits of Highly Effective People, first published in 1989, is a business and self-help book written by Stephen R. Covey. Covey defines effectiveness as the balance of obtaining desirable results with caring for that which produces those results.
+            </div>
+            <div className='text-xl'>
+                Stephn Coffy
+            </div>
+        </div>
+            <button className=' bg-gradient-to-r from-green-400 to-green-600 rounded-full cursor-pointer shadow-lg'><MdNavigateNext className='size-12 text-white' /></button>
+            <div className='absolute bottom-8 flex gap-4'>
+            <FaCircle className='text-green-500 shadow cursor-pointer'/>
+                {[...Array(3)].map(()=>{
+                    return <FaCircle className='text-green-200 shadow cursor-pointer'/>
                 })}
-
             </div>
-            <button onClick={next} className='absolute top-56 z-10 right-44 text-5xl bg-blue-500 text-white  rounded-full'><MdNavigateNext /></button>
-            </div>
-            
-            
-            
         </div>
     )
 }

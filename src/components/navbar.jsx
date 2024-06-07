@@ -65,7 +65,7 @@ React.useEffect(() => {
   return (
     <div className='fixed top-0 z-20 overflow-hidden'>
       {props.item ?
-      <div className={`bg flex gap-4 justify-between px-6 h-16 items-center  w-screen  shadow text-xl font-bold ${scrolled ? 'bg-white' : 'bg-transparent'}`} >
+      <div className={`bg flex gap-4 justify-between px-6 h-16 items-center  w-screen   text-xl font-bold ${scrolled ? 'bg-white border-b-2' : 'bg-transparent'}`} >
         <div>
         <Link to="/"><img src={logo} alt="" className=' h-8 ' /></Link>
         </div>

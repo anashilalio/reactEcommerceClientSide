@@ -39,13 +39,13 @@ const AllProducts = () => {
       const {categorie}=useParams();
       
   return (
-    <div className='ml-96 mt-32 flex gap-12 flex-wrap'>
+    <div className='ml-96 mt-10 flex gap-12 flex-wrap'>
 
         {products.map((product , index) => {
         return<>
         <div className='w-56 cursor-pointer  transition-all duration-150 relative' key={index}>
           <Link to={`http://localhost:5173/products/categorie/${product.name}`}>
-          <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" className={`w-full h-72`} 
+          <img src={`http://localhost/ecommerce%20project/admin/${product.images}`} alt="" className={`w-full h-72 rounded-xl shadow`} 
         onMouseEnter={() => setBeingHover(index)}
         onMouseLeave={() => setBeingHover(null)}/>
           </Link>
