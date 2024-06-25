@@ -34,7 +34,7 @@ const Reviews = () => {
                     {[...Array(5)].map((star ,index)=>{
                         return <>
                         
-                        <FaStar className={`cursor-pointer ${ review.rate >= index ? 'text-blue-500' : '' }`} onMouseEnter={()=>setHover(index) } />
+                        <FaStar className={`cursor-pointer ${ review.rate >= index ? 'text-green-500' : '' }`} onMouseEnter={()=>setHover(index) } />
                         </>
                         
                     })}

@@ -37,6 +37,7 @@ const Book = () => {
         bookInfo();
 
     }, [])
+    console.log(bookI)
     
     const filterBook = bookI.filter(e => e.name === book);
     
@@ -47,7 +48,7 @@ const Book = () => {
             const response = await axios.post("http://localhost/ecommerce%20project/client/cart.php" ,{clientid ,productid: productid} ) ;
             console.log(response)
         }
-        console.log(filterBook)
+        console.log(clientdata)
       
     return (
         <div className='mt-28'>
@@ -66,7 +67,7 @@ const Book = () => {
                     return <>
                         <div className='ml-20 flex gap-4 mb-12'>
                             <div>
-                                <img className='h-96 shadow-2xl  sticky top-28' src={`http://localhost/ecommerce%20project/admin/${bk.images}`} alt="" />
+                                <img className='h-96 shadow-2xl w-72  sticky top-28' src={`http://localhost/ecommerce%20project/admin/${bk.images}`} alt="" />
 
                             </div>
                             <div className='w-2/4 mx-auto'>
@@ -79,7 +80,7 @@ const Book = () => {
                                 <div className='mt-4  flex items-center'>
                                 {
   filterReview && filterReview.length > 0 ?
-  <div className='flex'>{[...Array(5)].map((e , index)=>{return <FaStar className={`${filterReview[0].rate>index && 'text-blue-500'}`}/>})}</div>
+  <div className='flex'>{[...Array(5)].map((e , index)=>{return <FaStar className={`${filterReview[0].rate>index && 'text-green-500'}`}/>})}</div>
   :
   <div className='flex'>{[...Array(5)].map((e , index)=>{return <FaStar/>})}</div>
 }
@@ -89,8 +90,8 @@ const Book = () => {
 
                                 </div>
                                 <div className='text-4xl mt-12 '>{bk.price}.00$</div>
-                                {payeditems.includes(bk.productid)
-                                 ?<div><a href={bk.link}><button onClick={addToCart} className='bg-blue-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
+                                {payeditems.includes(bk.productid) && clientdata
+                                 ?<div><a href={`http://localhost/ecommerce%20project/admin/uploads/${bk.link}`}><button onClick={addToCart} className='bg-green-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl'>
                                     Download
                                 </button></a> 
                                 </div>

@@ -63,7 +63,7 @@ const Cart = () => {
       <div className='w-96 overflow-hidden text-center mt-24'>
       <div className='text-3xl'>your total Order</div>
       <div className='text-4xl mt-8'>{totalOrder}$</div>
-      <Link to="/Payment"><div className='bg-blue-900 text-white rounded-2xl w-56 mx-auto mt-8 shadow-lg cursor-pointer
+      <Link to="/Payment"><div className='bg-green-700 text-white rounded-2xl w-56 mx-auto mt-8 shadow-lg cursor-pointer
       hover:opacity-80 h-10 pt-1 text-xl'>go to payment</div></Link>
 
       </div>

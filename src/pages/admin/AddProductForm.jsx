@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { IoImagesSharp } from "react-icons/io5";
+import { FaFileMedical } from "react-icons/fa6";
 
 export const AddProductForm = () => {
     const [name , setProductname] = useState("");
@@ -15,6 +16,7 @@ export const AddProductForm = () => {
     const [createdDate , setCreatedDate ] = useState();
     const [bookLink , setBookLink ] = useState();
     const [imageBeinghover , setImageBeingHover] =useState(false); 
+    const [file , setFile ] = useState(false)
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -28,6 +30,8 @@ export const AddProductForm = () => {
         formData.append('date', bookDate);
         formData.append('createdDate', createdDate);
         formData.append('bookLink', bookLink);
+        formData.append('file', file);
+
         try {
           const response = await axios.post('http://localhost/ecommerce%20project/admin/addProduct.php', formData, {
             headers: {
@@ -74,23 +78,36 @@ export const AddProductForm = () => {
         setPreviewImage(URL.createObjectURL(e.target.files[0]));
         console.log(previewImage)
     }
+    const handleFile = (e)=>{
+      setFile(e.target.files[0])
+      console.log(e.target.files[0])
+    }
+    
     const inputStyle = ()=>{
      return 'w-130 h-10 outline-none border-b-2 rounded-xl px-4 py-2'
     }
     
 
   return (
-    <div className='ml-48 '>
-        <form onSubmit={handleSubmit} className='flex  items-center space-y-6 flex-wrap  pl-32 pt-12 bg-gray-50'>
+    <div className='ml-48 mb-12'>
+        <form onSubmit={handleSubmit} className='flex  items-center  flex-wrap  pl-32 pt-12 bg-gray-50'>
 
           {/* <label htmlFor="">image</label> */}
+          
           <label htmlFor="ProductUp" className='relative border w-44 rounded-xl shadow-lg bg-white h-56  mr-8 cursor-pointer overflow-hidden hover:text-white hover:bg-black hover:bg-opacity-25'>
             {imageBeinghover && <div className={`absolute top-16 left-10 text-xl text-black z-10`} onMouseEnter={()=>setImageBeingHover(true)}><IoImagesSharp className='size-24'/></div>}
             {previewImage ? <img src={previewImage}  className={`size-full ${imageBeinghover && 'opacity-50'}`} onMouseEnter={()=>setImageBeingHover(true)} onMouseLeave={()=>setImageBeingHover(false)}/>:<IoImagesSharp className='size-24 mx-auto mt-14'/>}
             </label>
           <input type="file" id='ProductUp' name='image' onChange={handleImageChange} accept="image/*" className='hidden' />
+          <label htmlFor="files"  className=' relative border w-44 rounded-xl shadow-lg  bg-white h-56  mr-8 
+          cursor-pointer overflow-hidden hover:text-white hover:bg-black hover:bg-opacity-25 px-10 py-20'>
+         <div >
+           <FaFileMedical className='size-20'/>
+          </div>
+            </label>
           
-          <div className='flex  flex-wrap w-full gap-8'>
+          
+          <div className='flex  flex-wrap mt-8 w-full gap-8'>
 
           <input type="text" value={name} name='name' onChange={e => setProductname(e.target.value)} className={`${inputStyle()}`} placeholder='title'/>
 
@@ -106,8 +123,9 @@ export const AddProductForm = () => {
 
             </select>
             
-            <input type="date" name='date' value={bookDate}  onChange={e => setBookDate(e.target.value)} className={inputStyle()} placeholder='date'/>
-            <input type="text" name='link' value={bookLink}  onChange={e => setBookLink(e.target.value)} className={inputStyle()} placeholder='Link'/>
+            <input type="date" name='date' value={bookDate}  onChange={e => setBookDate(e.target.value)} className={inputStyle()}/>
+     
+<input type="file" name='link' id="files" value={bookLink} onChange={handleFile} className={`${inputStyle()} hidden`} placeholder='Link'/>
 
             
             <textarea type="text" value={description} name='description' onChange={e => setDescription(e.target.value)} className={`h-20 ${inputStyle()} w-full mr-10`} placeholder='description' />
@@ -118,7 +136,7 @@ export const AddProductForm = () => {
           </div>
             {/* <label htmlFor="">product Name</label> */}
            
-            <input type="submit"  value='add product' className="bg-blue-600 w-72 h-12 rounded-lg text-white cursor-pointer hover:opacity-80 "/>
+            <input type="submit"  value='add product' className="bg-green-600  w-72 h-12 rounded-lg text-white cursor-pointer hover:opacity-80 "/>
             
         </form>
         

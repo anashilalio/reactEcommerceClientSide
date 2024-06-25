@@ -16,7 +16,7 @@ const hero = () => {
           {/* <button className='mx-auto bg-green-500 mt-4 text-white font-mono font-extrabold
          px-6 py-2 rounded-3xl mb-5 hover:shadow-xl'><Link to='/categorie'>Explorez davantage</Link></button> */}
          <div className='relative w-full mt-16'>
-         <Link to="/Search" >
+         <Link to="/products/HORROR" >
           <FaSearch className='absolute text-green-600 top-4 right-6  cursor-pointer text-3xl ' />
           </Link>
         <input type="text" placeholder='SEARCH FOR A BOOK' className='w-full  rounded-full outline-none text-black px-12 border h-16 bg-white shadow shadow-green-200' value={search} onChange={(e)=>setSearch(e.target.value)}/>

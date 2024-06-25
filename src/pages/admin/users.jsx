@@ -37,7 +37,7 @@ export const Users = () => {
     
 
     <div className='   mr-20 rounded-lg overflow-hidden bg-gray-50 space-y-4'>
-        <div className=' w-full grid grid-cols-6  px-10 h-10 text-xl font-mono text-white bg-blue-600 h-12 pt-2 rounded-xl' >
+        <div className=' w-full grid grid-cols-6  px-10 h-10 text-xl font-mono text-white bg-green-600 h-12 pt-2 rounded-xl' >
         <div>photo</div>
             <div>Name</div>
             <div >Password</div>

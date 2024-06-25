@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ContextProviderClient, { contextProviderInfo } from '../../context/ContextProvider';
 import AllProducts from './AllProducts';
 import { FaSearch } from "react-icons/fa";
-
+ 
 const Categorie = () => {
     const [categories , setCategories ] = useState([{}]);
     const [loading , setLoading] = useState(true);
@@ -19,9 +19,9 @@ const Categorie = () => {
     },[])
 
     const {currentCtg , setCurrentCtg} = useContext(contextProviderInfo)
-    console.log("categorie : ", categories)
+    
   return (
-    <div>
+    <div className='bg-gray-50'>
       
       {loading ?
      <div role="status" className=' flex justify-center  items-center bg-black h-screen '>
@@ -34,30 +34,22 @@ const Categorie = () => {
     :
     <div className='w-full'>
       <div className='flex justify-center mt-20  w-full relative' > 
-        <div className='relative w-2/4 ml-20'>
-        <input type="text" className='w-full h-12 outline-none rounded-full border px-6 shadow' />
-
-<Link to="/Search" >
-    <FaSearch className='absolute top-2 right-6  cursor-pointer text-3xl ' />
-    </Link>
-        </div>
+        
         
       </div>
-      <div className='w-64 shadow-md fixed top-16 h-screen space-y-8 '>
+      <div className=' fixed  ml-12 mt-8 w-64  overflow-y-auto  top-16 rounded-xl shadow-xl h-120 bg-white pb-64'>
       
-      <div className='mt-16'>
-      <Link to='/categorie' onClick={()=>setCurrentCtg(null)} className='ml-10  mt-20   cursor-pointer hover:opacity-70 text-lg font-mono'>recent BOOKS</Link>
-      </div>
+      
         {categories.map((ctg)=>{
             return<>
                         <Link   to={`/products/${ctg.categorie}`} 
-        onClick={()=>setCurrentCtg(ctg.categorie)} className={ctg.categorie===currentCtg ?'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono text-slate-400':'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono'}><CategorieType title={ctg.categorie}/></Link>
+        onClick={()=>setCurrentCtg(ctg.categorie)} className={ctg.categorie===currentCtg ?'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono text-green-400':'ml-12 mt-20  cursor-pointer hover:opacity-70 text-lg font-mono'}>
+          <CategorieType title={ctg.categorie}/></Link>
     
             </>
         })}
       
         </div>
-       {currentCtg==null&& <AllProducts />}
 
     </div>
   }    

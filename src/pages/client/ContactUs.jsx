@@ -26,7 +26,7 @@ export const ContactUs = () => {
         </div>
       <input type="  " value={email} name='email' placeholder='email' className={inputStyle()} onChange={e=>setEmail(e.target.value)}/>
       <textarea type="message" value={message} name='message' placeholder='message' className={`${inputStyle()} h-20`} onChange={e=>setMessage(e.target.value)}/>
-      <input type="submit"  className='bg-black w-130 text-white h-12 rounded-xl hover:opacity-80 cursor-pointer'/>
+      <input type="submit"  className='bg-green-500 w-130 text-white h-12 rounded-xl hover:opacity-80 cursor-pointer'/>
       </form>
       
     </div>

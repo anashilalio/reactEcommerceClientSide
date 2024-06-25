@@ -5,7 +5,7 @@ import axios from 'axios'
 import { IoMdPhotos } from "react-icons/io";
 
 const Profile = () => {
-    const {clientdata   ,login } = useContext(contextProviderInfo)
+    const {clientdata   ,login ,setLogin } = useContext(contextProviderInfo)
     const [wishlist , setWishlist ] = useState([]);
     const [image,setImage ] = useState();
     const [user , setUser ] = useState();
@@ -13,10 +13,10 @@ const Profile = () => {
     const [previewImage , setPreviewImage ] = useState();
    useEffect(()=>{
     const getwishlist =async()=>{
-        const clientid = parseInt(clientdata.clientid); 
+        const clientid = parseInt(clientdata); 
         const response = await axios.post("http://localhost/ecommerce%20project/client/getWishlist.php" , {clientid : clientid});
         const jssson  = response.data;
-        
+        console.log(jssson)
         const promises = jssson.map(async (i) => {
             const responses = await fetch("http://localhost/ecommerce%20project/client/Product.php");
             const resp = await responses.json();
@@ -51,6 +51,10 @@ const Profile = () => {
           })
           
    }
+   const logout=()=>{
+    localStorage.removeItem('userData');
+    setLogin(localStorage.setItem('isLoggedIn' , 'false'))
+   }
    console.log(change)
   return (
     <div className='mt-16  shadow-2xl rounded-2xl flex w-full'>
@@ -67,23 +71,22 @@ const Profile = () => {
             </div>
         <div className='text-2xl '>{clientdata.username}</div>
         <div className='text-sm text-gray-300 '>{clientdata.email}</div>
-        <div className=' whitespace-nowrap -ml-2 mt-8 bg-black rounded-xl text-white px-3 cursor-pointer w-44 text-center'>change password</div>
+        <button   className='hover:text-blue-500  px-4 py-1 rounded-lg hover:opacity-80 text-xl' onClick={()=>logout()}>logout</button>
         
         <input type="file" id='fileUp' className=' hidden' onChange={SubmitFile}/>
-        <div onClick={()=>changePhoto()} className=' bg-blue-500 text-white px-8 mt-4 rounded-xl cursor-pointer'>submit</div>
+        <div onClick={()=>changePhoto()} className=' bg-blue-500 text-white px-8 mt-4 w-full text-center rounded-xl cursor-pointer'>submit</div>
         </div>
         <div className='  w-full '>
             
             <div className='flex flex-col justify-center items-center  w-full mt-12'>
-                <div>
-                    recent shopped item
-                </div>
+                
                 <div className='text-center'>
-                    wishlist
-                    <div className='flex gap-4'>
+                    <div className='text-xl font-bold'>wishlist</div>
+                    
+                    <div className='flex gap-4 mb-12'>
                         {wishlist.map((wishl)=>{
-                            return <div className='size-24 '>
-                                <img src={`http://localhost/ecommerce%20project/admin/${wishl.images}`} className='w-full' alt="" />
+                            return <div className='h-32 w-20 rounded shadow-lg overflow-hidden  '>
+                                <img src={`http://localhost/ecommerce%20project/admin/${wishl.images}`} className='w-full  h-full' alt="" />
 
                                 {wishl.name}
                                 {wishl.price}

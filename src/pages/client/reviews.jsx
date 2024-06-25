@@ -65,75 +65,7 @@ const Reviews = ({productid}) => {
 
   return (
         <div className='w-4/5 mx-auto mt-56 '>
-                <div className=' max-w-12 flex gap-32 items-center mb-12 xl:w-full '>
-                    <div className='sm:text-sm md:text-3xl xl:text-4xl'>addReviews</div>
-
-                    <div className='flex items-center sm:text-sm md:text-3xl xl:text-4xl'>
-                        reviews
-                        <div className='flex flex-col  ml-24 text-sm   w-full'>
-
-                            <div className='flex items-center gap-2 '>5 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm sm:w-12 xl:w-48 md:w-24'>
-
-                                    <div className='bg-blue-400 w-12 sm:w-12 xl:w-12 xl:w-24' >
-
-                                    </div>
-
-                                </div>
-                                {reviews.map((e)=>e.rate == 5 && rate5++ )}
-                                {rate5}
-                            </div>
-                            <div className='flex items-center gap-2'>4 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
-
-                                    <div className='bg-blue-400 w-10 sm:w-6  md:w-10 xl:w-24'>
-
-                                    </div>
-
-                                </div>
-                                {reviews.map((e)=>e.rate == 4 && rate4++ )}
-                                {rate4}
-                            </div>
-                            <div className='flex items-center gap-2'>3 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
-
-                                    <div className='bg-blue-400 w-4 sm:w-6  md:w-10 xl:w-24'>
-
-                                    </div>
-
-                                </div>
-                                {reviews.map((e)=>e.rate == 3 && rate3++ )}
-                                {rate3}
-                            </div>
-                            <div className='flex items-center gap-2'>2 reviews
-                                <div className='w-24 bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
-
-                                    <div className='bg-blue-400 w-12 sm:w-6 md:w-10 xl:w-24'>
-
-                                    </div>
-
-                                </div>
-                                {reviews.map((e)=>e.rate == 2 && rate2++ )}
-                                {rate2}
-                            </div>
-                            <div className='flex items-center gap-2 sm:text-sm '>1 reviews
-                                <div className=' bg-gray-400 h-3 flex sm:w-12 xl:w-48 md:w-24'>
-
-                                    <div className='bg-blue-400 w-2 sm:w-6 xl:w-24 md:w-10 xl:w-24'>
-
-                                    </div>
-
-                                </div>
-                                {reviews.map((e)=>e.rate == 1 && rate1++ )}
-                                {rate1}
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-                </div>
+                <h1 className='text-3xl font-bold'>Reviews</h1>
                 <div className='flex flex-col gap-10 mb-10'>
                    {reviews.map((e)=>{
                     return <ClientReviews  review={e.comments} name={e.username} rate={e.rate} dat={e.dat} photo={e.photo}/>
@@ -151,7 +83,7 @@ const Reviews = ({productid}) => {
                     {[...Array(5)].map((star ,index)=>{
                         return <>
                         
-                        <FaStar className={`cursor-pointer ${ hover >= index ? 'text-blue-500' : '' }`} onMouseEnter={()=>setHover(index) } />
+                        <FaStar className={`cursor-pointer ${ hover >= index ? 'text-green-500' : '' }`} onMouseEnter={()=>setHover(index) } />
                         </>
                         
                     })}
@@ -159,7 +91,7 @@ const Reviews = ({productid}) => {
                     </div>
                             <textarea type="text" className='w-full outline-none rounded-2xl shadow border p-4 h-28' value={comment} onChange={(e)=>setComment(e.target.value)}/>
                     <div className='mb-4 w-full '>
-                    <input type="submit" className='cursor-pointer bg-blue-600 text-white px-4 rounded-2xl text-xl relative hover:opacity-65' style={{left:"91%"}} onClick={()=>sendReview()}/>
+                    <input type="submit" className='cursor-pointer bg-green-600 text-white px-4 rounded-2xl text-xl relative hover:opacity-65' style={{left:"91%"}} onClick={()=>sendReview()}/>
 
                     </div>
                     </form>

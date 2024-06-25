@@ -4,7 +4,9 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { contextProviderInfo } from '../context/ContextProvider';
-import logo from '../../public/logo.png'
+import logo from '../../public/textLogo.png'
+import cover from '../../public/cover10.png';
+
 const Login = () => {
     const [username , setUsername] = useState(""); 
     const [password , setPasswoord] = useState("");
@@ -13,7 +15,7 @@ const Login = () => {
   const [email , setEmail ] = useState("");
   const [loading , setLoding ] = useState(false)
 
-  const navigate = useNavigate(); // Get the navigate object
+  const navigate = useNavigate(); 
   
   useEffect(()=>{
     if(login){
@@ -73,10 +75,14 @@ const Login = () => {
       <span class="sr-only">Loading...</span>
   </div>
     : 
-    <div className=' h-screen flex  items-center '>
-      <form onSubmit={SignIn}  className='w-auto  bg-white shadow-2xl text-black   mx-auto  px-40  py-16 rounded-xl flex flex-col items-center space-y-4'>
-      <h1 className='font-black text-4xl'><img src={logo} className='size-32' alt="" /></h1>
-      {(Invalidinput || !userExist) && 
+    <div className=' h-screen flex  items-center justify-center '>
+      <div className='    bg-green-900   h-120  px-12  py-16 border shadow-lg rounded-l-2xl'>
+        <img src={cover} className='w-64 h-72' alt="" />
+      </div>
+      <div>
+      <form onSubmit={SignIn}  className='w-auto  bg-white border shadow-lg text-black rounded-r-2xl   h-120  mx-auto  px-16  py-16  flex flex-col items-center space-y-4'>
+      <h1 className='font-black text-4xl'><img src={logo} className='w-32 h-12' alt="" /></h1>
+      {(Invalidinput) && 
       <div className='bg-red-600 text-white py-2 px-8 '>please entre a valid <br /> username or password</div> }
         <div className='flex justify-between'>
         {/* <label htmlFor="">username</label> */}
@@ -96,15 +102,13 @@ const Login = () => {
         
         <input type="submit"  className={username==="" || password==="" 
         ?
-        "bg-blue-500 h-10 w-60 hover:bg-blue-400 cursor-not-allowed text-white"
-      :'bg-blue-500 h-10 w-60 hover:bg-blue-400 cursor-pointer text-white'
+        "bg-green-500 h-10 w-60 hover:bg-green-400 cursor-not-allowed text-white"
+      :'bg-green-500 h-10 w-60 hover:bg-green-400 cursor-pointer text-white'
       }/>
-        {userExist &&
-            <div>
-                {userData.username}
-            </div>
-        }
+        
       </form>
+      </div>
+      
     </div>
     
     }

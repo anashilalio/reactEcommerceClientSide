@@ -8,69 +8,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 const stripePromise = loadStripe('pk_test_51PHofh091LehQepwcElJoNqFMly6zSMdyKNlJXF1HLYSK2hZg10wLFVdjqrAPZFzOf5n2a5BWAXlzpy53bdKnAYL00I9kfv4I0');
 
-const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const cardNumberElement = elements.getElement(CardNumberElement);
-    const cardExpiryElement = elements.getElement(CardExpiryElement);
-    const cardCvcElement = elements.getElement(CardCvcElement);
-
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
-      card: {
-        number: cardNumberElement,
-        exp_month: cardExpiryElement,
-        exp_year: cardExpiryElement,
-        cvc: cardCvcElement,
-      },
-    });
-
-    if (error) {
-      console.log('[error]', error);
-    } else {
-      console.log('[PaymentMethod]', paymentMethod);
-    }
-  };
-  
-
-  return (
-    <form onSubmit={handleSubmit} className='w-full flex flex-col'>
-      <div className=''>
-        <div className='flex flex-col '>
-        <label htmlFor="">Email</label>
-        <input type="email" className='h-12 p-4 text-md shadow mb-4 outline-none' placeholder='email'/>
-        </div>
-        
-        <div>
-        <label htmlFor="">Card Number</label>
-        <CardNumberElement className='rounded  h-12 p-4 bg-white shadow mt-2' />
-        </div>
-        
-        <div className='flex justify-between gap-20 my-4'>
-          <div>
-          <label htmlFor="">Expiration date</label>
-        <CardExpiryElement className='rounded  w-72 h-12 p-4 bg-white shadow mt-2' />
-          </div>
-        
-        <div>
-        <label htmlFor="">Security Code</label>
-        <CardCvcElement className=' rounded w-72 h-12 p-4 bg-white shadow mt-2' />
-        </div>
-       
-        </div>
-        
-      </div>
-      
-    </form>
-  );
-};
 
 const Payment = () => {
   const { listItems , setListItems , clientdata} = useContext(contextProviderInfo);
@@ -94,16 +32,73 @@ const Payment = () => {
     const send = axios.post("http://localhost/ecommerce%20project/client/payed.php" , {listItems : listofProducts , clientid :clientid , datt :datt})
     console.log(send)
   }
- 
+  const total = listItems.reduce((acc, item) => acc + Number(item.price) , 0);
+  const NumberOfProduct = listItems.length;
+  console.log(total)
+ const check = ()=>{
+
+ }
   return (
-    <div className='relative'>
-<div className='mt-20  rounded-2xl shadow-xl px-12 py-4 bg-slate-50 mx-72 flex flex-col items-center'>
-      <img src={logo} alt="" className='size-32'/>
-      <Elements stripe={stripePromise} >
-        <CheckoutForm />
-      </Elements>
+    <div className='relative mt-20 flex'>
+      
+      
+<div className=' rounded-2xl shadow-xl px-12 py-4 bg-slate-50  flex flex-col items-center w-full'>
+<div className='flex gap-12 font-bold'>
+      {listItems.map((e)=>{
+        return <div className='text-center bg-white  rounded-xl shadow w-32 overflow-hidden'>
+          <div><img src={`http://localhost/ecommerce%20project/admin/${e.images}`} className='h-32 w-full' alt="" /></div>
+          {e.name}
+          <div >{e.price}DH</div>
+        </div>
+      })}
+      </div>
+      <div className='space-y-4'>
+        <div className='flex gap-4'>
+      <div className='flex flex-col'>
+          <label htmlFor="" >First Name</label>
+        
+        <input type="text" className='w-96 h-12 shadow-lg  rounded-lg outline-none px-4'/>
+        </div>
+        <div className='flex flex-col'>
+          <label htmlFor="" >last Name</label>
+        
+        <input type="text" className='w-96 h-12 shadow-lg  rounded-lg outline-none px-4'/>
+        </div>
+
+        </div>
+        <div className='flex gap-4'>
+      <div className='flex flex-col'>
+          <label htmlFor="" >Phone Number</label>
+        
+        <input type="Number" className='w-96 h-12 shadow-lg  rounded-lg outline-none px-4'/>
+        </div>
+        <div className='flex flex-col'>
+          <label htmlFor="" >Email</label>
+        
+        <input type="text" className='w-96 h-12 shadow-lg  rounded-lg outline-none px-4'/>
+        </div>
+
+        </div>
+        <div className='flex flex-col'>
+          <label htmlFor="" >card Number</label>
+        
+        <input type="Number" className='w-full h-12 shadow-lg  rounded-lg outline-none px-4'/>
+        </div>
+        <div className='flex gap-4'>
+
+        <div className='flex flex-col'>
+        <label htmlFor="" >Expiration date</label>
+                <input type="Number" className='w-96 h-12 shadow-lg px-4 outline-none rounded-lg '/>
+        </div>
+        <div className='flex flex-col'>
+        <label htmlFor="" >Code</label>
+        <input type="Number" className='w-96 h-12 shadow-lg px-4  rounded-lg outline-none'/>
+        </div>
+        </div>
+
+      </div>
       <div className=''>
-      <button type="submit" onClick={()=>payed()} className='bg-blue-500 rounded text-white mx-auto px-16 py-2 mt-4 text-xl'>
+      <button type="submit" onClick={()=>payed()} className='bg-green-500 rounded text-white mx-auto px-16 py-2 mt-4 text-xl '>
         Pay
         
       </button>
@@ -121,7 +116,27 @@ const Payment = () => {
 
     </div>
     }
-    
+    <div className='w-96 '>
+      <div>
+        {listItems.map((e)=>{
+          return <div className='w-96 h-16 flex justify-between px-12 items-center gap-4'>
+            <div>{e.name}</div>
+            <div className='text-xl font-semibold'>{e.price}DH</div>
+          </div>
+        })}
+        <div className='flex justify-between px-12'>
+        Number of Products  :  
+        <div className='font-semibold'>{NumberOfProduct}</div>
+        </div>
+        
+        <div className='text-3xl text-center mt-32 font-bold'>
+        {total} DH
+
+        </div>
+     
+
+      </div>
+    </div>
     </div>
     
   );

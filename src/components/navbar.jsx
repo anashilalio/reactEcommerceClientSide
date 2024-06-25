@@ -70,7 +70,7 @@ React.useEffect(() => {
         <Link to="/"><img src={logo} alt="" className=' h-8 ' /></Link>
         </div>
         <div className='relative'>
-        <Link to='categorie'  className='hover:text-green-500 px-4 py-1 rounded-lg hover:opacity-80'>
+        <Link to='products/HORROR'  className='hover:text-green-500 px-4 py-1 rounded-lg hover:opacity-80'>
         Categorie
         </Link>
         <Link to="/ContactUs" className='hover:text-green-500 px-4 py-1 rounded-lg hover:opacity-80'>ContactUs</Link>
@@ -100,9 +100,9 @@ React.useEffect(() => {
       </div>
       
       :
-      <div className='bg-blue-800 text-white  flex flex-col    px-6 h-screen  items-center '>
+      <div className='bg-green-800 text-white  flex flex-col    px-6 h-screen  items-center '>
         <div>
-            <Link to="/"><img src={logoDashboard} alt="" className='size-44' /></Link>
+            <Link to="/"><img src={logoDashboard} alt="" className='w-32 my-12' /></Link>
         </div>
         <div className='flex  gap-6 flex-col -mt-4 '>
         <Link to='/'  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg flex items-center gap-2'><RiHome2Fill />dashboard</Link>
@@ -115,7 +115,7 @@ React.useEffect(() => {
 
 
 
-        <Link to="/signin"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg  flex items-center gap-2'><IoLogOut />Logout</Link>
+        {/* <Link to="/signin"  className='hover:opacity-80 hover:text-white px-4 py-1 rounded-lg  flex items-center gap-2'><IoLogOut />Logout</Link> */}
         
         
      

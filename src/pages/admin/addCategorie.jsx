@@ -16,7 +16,7 @@ const AddCategorie = () => {
             className='text-black w-72 outline-none border-b-2 h-12' value={categorie} onChange={e=>setCategorie(e.target.value)}  />
             <textarea type="description" placeholder='description' name='description'
              className='text-black w-72 outline-none border-b-2 ' value={description} onChange={e=>setDescription(e.target.value)}  />
-            <input type="submit" className='w-72 bg-blue-600 text-white cursor-pointer rounded-xl h-12 hover:opacity-80' />
+            <input type="submit" className='w-72 bg-green-600 text-white cursor-pointer rounded-xl h-12 hover:opacity-80' />
         </form>
     </div>
   )
