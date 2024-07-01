@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { FaTrashAlt } from "react-icons/fa";
 import { PiNotePencilBold } from "react-icons/pi";
 import { TiDelete } from "react-icons/ti";
 import axios from 'axios';
 
 const Books = () => {
-    const [books , setBooks ] = useState([]);
-    const [modify , setModify] = useState(false);
-    const [name , setProductname] = useState("");
+    const [books, setBooks] = useState([]);
+    const [modify, setModify] = useState(false);
+    const [name, setProductname] = useState("");
     const [description, setDescription] = useState('');
-    const [price , setPrice ] = useState("");
-    const [categories , setCategories ] = useState([]);
-    const [categorie , setCategorie ] = useState("");
-    const [image , setImage ] = useState("");
-    const [autheur , setAutheur ] = useState("");
-    const [previewImage, setPreviewImage] = useState(null);
-    const [bookDate , setBookDate ] = useState();
-    const [createdDate , setCreatedDate ] = useState();
-    const [bookLink , setBookLink ] = useState();
-    const [imageBeinghover , setImageBeingHover] =useState(false); 
-    const [file , setFile ] = useState(false)
-    const [deletes , setDeletes  ] = useState(false);
-    const [deletebook ,setDeletebook ] = useState("");
-    useEffect(()=>{
-        const listOfBooks = async ()=>{
+    const [price, setPrice] = useState("");
+    const [categories, setCategories] = useState([]);
+    const [categorie, setCategorie] = useState("");
+    const [image, setImage] = useState("");
+    const [autheur, setAutheur] = useState("");
+    const [bookDate, setBookDate] = useState("");
+    const [createdDate, setCreatedDate] = useState("");
+    const [bookLink, setBookLink] = useState("");
+    const [file, setFile] = useState(null);
+    const [deletes, setDeletes] = useState(false);
+    const [deletebook, setDeletebook] = useState("");
+    const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        const listOfBooks = async () => {
             const response = await fetch("http://localhost/ecommerce%20project/client/product.php");
-            const jsonn = await response.json();
-            console.log(jsonn)
-            setBooks(jsonn);
-        }
-        const getCategories = async()=>{
+            const json = await response.json();
+            setBooks(json);
+        };
+        const getCategories = async () => {
             const response = await fetch("http://localhost/ecommerce%20project/client/getCategorie.php");
             const json = await response.json();
-            console.log(json)
-            setCategories(json)
-          }
-          getCategories();
+            setCategories(json);
+        };
         listOfBooks();
-    },[deletebook , modify])
-    const modifyBook=async()=>{
+        getCategories();
+    }, [deletebook, modify]);
+
+    const modifyBook = async () => {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
@@ -53,99 +52,110 @@ const Books = () => {
 
         const response = await axios.post('http://localhost/ecommerce%20project/admin/addProduct.php', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data'
-            }})
-    console.log(response)
-    }
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        console.log(response);
+    };
+
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
-    }
-    const handleFile = (e)=>{
-        setFile(e.target.files[0])
-      }
-      const handleSelect = (e)=>{
-        setCategorie(e.target.value)
-        console.log("categorie" , categorie)
-      }
-      const delet=async()=>{
-        const response = axios.post("http://localhost/ecommerce%20project/admin/deleteBook.php" , {deletebook}) 
-        console.log(response)
-        setDeletebook("")
-      }
-  return (
-    <div className='pl-72  bg-gray-100'
-    >
-        <div className='text-center text-6xl py-8'>Books</div>
-    <div className=' pr-12 pb-12  overflow-hidden'>
-    <div className='grid grid-cols-6 w-full border-b-2 h-20 align-center pl-12 text-2xl font-mono text-white bg-green-600 mb-4 rounded-2xl shadow'>
-                <div className='flex items-center'>image</div>
-                <div className='flex items-center'>title</div>
-                <div className='flex items-center'>category</div>
-                <div className='flex items-center'>autheur</div>
-                <div className='flex items-center'>date</div>
-                <div className='flex items-center'>Modify</div>
+    };
+    const handleFile = (e) => {
+        setFile(e.target.files[0]);
+    };
+    const handleSelect = (e) => {
+        setCategorie(e.target.value);
+    };
+    const delet = async () => {
+        const response = await axios.post("http://localhost/ecommerce%20project/admin/deleteBook.php", { deletebook });
+        console.log(response);
+        setDeletebook("");
+    };
 
+    const filteredBooks = books.filter(book =>
+        book.name.toLowerCase().includes(search.toLowerCase()) ||
+        book.categorie.toLowerCase().includes(search.toLowerCase()) ||
+        book.autheur.toLowerCase().includes(search.toLowerCase())
+    );
 
+    return (
+        <div className='px-44 pr-8 pt-12 bg-gray-100 min-h-screen'>
+            <div className='text-center text-4xl font-bold py-8'>Livres</div>
+            <div className='flex justify-end mb-6'>
+                <input
+                    type="text"
+                    placeholder="Search books..."
+                    className="border border-gray-300 rounded-lg p-2 shadow-sm focus:outline-none focus:border-indigo-500"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </div>
-        {books.map((book)=>{
-            return<>
-            <div className='grid grid-cols-6 w-full border-b-2 w-full pl-12 h-28 cursor-pointer rounded-2xl shadow mb-4 hover:bg-gray-200'>
-            <div  className='flex items-center'><img src={`http://localhost/ecommerce%20project/admin/${book.images}`} className='h-20 w-16' alt="" /></div>            
-            <div className='flex items-center'>{book.name}</div>
-            <div className='flex items-center'>{book.categorie}</div>
-            <div className='flex items-center'>{book.autheur}</div>
-            <div className='flex items-center'>{book.dat}</div>
-            <div className='flex items-center gap-4'>
-                <PiNotePencilBold className='hover:text-blue-500' onClick={()=>setModify(true)}/>
-             <FaTrashAlt className='hover:text-blue-500' onClick={()=>{setDeletebook(book.name) ; setDeletes(true)}}/> </div>
-
+            <div className='overflow-hidden '>
+                <div className='grid grid-cols-6 gap-4 p-4 bg-gray-200 rounded-lg text-lg font-semibold text-gray-700 shadow-md'>
+                    <div>Image</div>
+                    <div>Titre</div>
+                    <div>Catégorie</div>
+                    <div>Auteur</div>
+                    <div>Date</div>
+                    <div className='text-center'>Actions</div>
+                </div>
+                {filteredBooks.map((book) => (
+                    <div key={book.name} className='grid grid-cols-6 gap-4 p-4 bg-white rounded-lg shadow-md mt-4 hover:bg-gray-50'>
+                        <div>
+                            <img src={`http://localhost/ecommerce%20project/admin/${book.images}`} className='h-16 w-12 object-cover rounded-lg' alt={book.name} />
+                        </div>
+                        <div className='flex items-center'>{book.name}</div>
+                        <div className='flex items-center'>{book.categorie}</div>
+                        <div className='flex items-center'>{book.autheur}</div>
+                        <div className='flex items-center'>{book.dat}</div>
+                        <div className='flex items-center justify-center gap-4'>
+                            <PiNotePencilBold className='text-blue-500 hover:text-blue-700 cursor-pointer' onClick={() => setModify(true)} />
+                            <FaTrashAlt className='text-red-500 hover:text-red-700 cursor-pointer' onClick={() => { setDeletebook(book.name); setDeletes(true); }} />
+                        </div>
+                    </div>
+                ))}
             </div>
-            </>
-        })}
-         {deletes && <div className='fixed inset-0 bg-black opacity-50' style={{backdropFilter: 'blur(5px)'}}></div>}
 
-        {deletes && 
-        <div className='bg-white fixed top-72 h-28 px-12 py-8 ml-72 rounded-xl shadow-xl'>
-                <div className='relative w-full'>
-            <TiDelete className='absolute -right-10 -top-8 size-8 cursor-pointer' onClick={()=>setDeletes(false) }/>
-            </div>
-                <div>voulez-vous supprimer ce livre</div>
-                <button className='text-white bg-red-400  px-4 rounded-xl text-center ml-12 mt-4 ' onClick={()=>{delet() ;setDeletes(false)}}>supprimer</button>
+            {deletes && (
+                <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
+                    <div className='bg-white p-8 rounded-lg shadow-lg relative'>
+                        <TiDelete className='absolute top-2 right-2 text-2xl cursor-pointer text-gray-500 hover:text-gray-700' onClick={() => setDeletes(false)} />
+                        <div className='text-center text-lg mb-4'>Do you want to delete this book?</div>
+                        <div className='flex justify-center gap-4'>
+                            <button className='bg-red-500 text-white px-4 py-2 rounded-lg' onClick={() => { delet(); setDeletes(false); }}>Delete</button>
+                            <button className='bg-gray-300 text-gray-700 px-4 py-2 rounded-lg' onClick={() => setDeletes(false)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {modify && (
+                <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
+                    <div className='bg-white p-8 rounded-lg shadow-lg w-1/3 relative'>
+                        <TiDelete className='absolute top-2 right-2 text-2xl cursor-pointer text-gray-500 hover:text-gray-700' onClick={() => setModify(false)} />
+                        <div className='text-center text-2xl mb-4'>Modify Book</div>
+                        <div className='grid grid-cols-2 gap-4'>
+                            <input type="text" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Title' onChange={e => setProductname(e.target.value)} value={name} />
+                            <select name="categorie" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' onChange={handleSelect} value={categorie}>
+                                <option value="" disabled>Select Category</option>
+                                {categories.map((cat) => (
+                                    <option key={cat.categorie} value={cat.categorie}>{cat.categorie}</option>
+                                ))}
+                            </select>
+                            <input type="text" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Description' onChange={e => setDescription(e.target.value)} value={description} />
+                            <input type="text" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Price' onChange={e => setPrice(e.target.value)} value={price} />
+                            <input type="text" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Author' onChange={e => setAutheur(e.target.value)} value={autheur} />
+                            <input type="date" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Date' onChange={e => setBookDate(e.target.value)} value={bookDate} />
+                            <input type="file" id='ProductUp' name='image' onChange={handleImageChange} accept="image/*" className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' />
+                            <input type="file" name='link' id="files" onChange={handleFile} className='border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500' placeholder='Link' />
+                            <button className='col-span-2 bg-green-500 text-white rounded-lg p-2 mt-4' onClick={() => { modifyBook(); setModify(false); }}>Modify</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        }
-        {modify && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-2xl p-12'>
-            <div className='relative w-full'>
-            <TiDelete className='absolute -right-10 -top-12 size-12 cursor-pointer' onClick={()=>setModify(false)}/>
-            </div>
-            <div className='text-2xl text-center'>Modify</div>
-            <div className='grid grid-cols-2 gap-4'>
-                <input type="text" className='border-2 border-gray-300 rounded-2xl p-2' placeholder='title' onChange={e => setProductname(e.target.value)} value={name}/>
-                <select name="" id="" onChange={handleSelect} >
-             {categories.map((categorie)=>{
-              return<>
-                <option value={categorie.categorie}>{categorie.categorie}</option>
-              </>
-             })}
-
-            </select>                <input type="text" className='border-2 border-gray-300 rounded-2xl p-2' placeholder='description' onChange={e => setDescription(e.target.value)} value={description}/>
-            <input type="text" className='border-2 border-gray-300 rounded-2xl p-2' placeholder='Price' onChange={e => setPrice(e.target.value)} value={price}/>
-
-                <input type="text" className='border-2 border-gray-300 rounded-2xl p-2' placeholder='autheur' onChange={e => setAutheur(e.target.value)} value={autheur}/>
-                <input type="date" className='border-2 border-gray-300 rounded-2xl p-2' placeholder='date' onChange={e => setBookDate(e.target.value)} value={bookDate}/>
-                <input type="file" id='ProductUp' name='image' onChange={handleImageChange} accept="image/*" className='' />
-                <input type="file" name='link' id="files" value={bookLink} onChange={handleFile} placeholder='Link'/>
-
-                <button className='bg-green-500 text-white rounded-2xl p-2' onClick={()=>{modifyBook(); setModify(false)}}>Modify</button>
-            </div>
-           
-            
-        </div>}
-    </div>
-         
-    
-    
-    </div>
-  )
+    );
 }
 
-export default Books
+export default Books;

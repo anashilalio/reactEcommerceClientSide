@@ -22,7 +22,7 @@ import Search from "./pages/client/Search";
 import Reviews from "./pages/admin/Reviews";
 
 function App() {
-  const [isClient , setIsClient ] = useState(true);
+  const [isClient , setIsClient ] = useState(false);
   return (
     <>
 <ContextProviderClient>
@@ -32,7 +32,7 @@ function App() {
       {isClient ?
       <div>
         <Routes>
-  <Route path="/products/:categorie/:book" element={<Book />} />
+  <Route path="/products/:categorie/:book/:id" element={<Book />} />
   <Route path="/categorie" element={<Categorie/>}/>
   <Route path="/products/:categorie" element={<Products />} />
   <Route path="/contactus" element={<ContactUs/>}/>
