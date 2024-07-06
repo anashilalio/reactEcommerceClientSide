@@ -41,7 +41,7 @@ const Categorie = ({ onCategoryClick }) => {
                   setCurrentCtg(ctg.categorie);
                   onCategoryClick();
                 }}
-                className={ctg.categorie === currentCtg ? 'block text-center py-2 mb-2 rounded-md bg-green-400 text-white w-44' : 'w-44 block text-center py-2 mb-2 rounded-md bg-gray-100 hover:bg-green-400 hover:text-white transition'}
+                className={ctg.categorie === currentCtg ? 'block text-center py-2 mb-2 rounded-md bg-green-400 text-white w-44 pr-8' : 'w-44 block text-center py-2 mb-2 pr-8 rounded-md bg-gray-100 hover:bg-green-400 hover:text-white transition'}
               >
                 <CategorieType title={ctg.categorie} />
               </Link>

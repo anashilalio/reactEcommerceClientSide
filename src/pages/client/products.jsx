@@ -49,7 +49,7 @@ const Products = () => {
   const { search, setSearch, clientdata } = useContext(contextProviderInfo);
   const { categorie } = useParams();
   const [searched, setSearched] = useState(false);
-
+console.log(categorie)
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const querySearch = searchParams.get('search') || '';
@@ -82,7 +82,9 @@ const Products = () => {
     setSearchParams({});
   };
 
-  const filteredProducts = products.filter(product => product.categorie === categorie);
+  const filteredProducts = products.filter(product => product.categorie.trim() === categorie.trim());
+  console.log(products)
+console.log(filteredProducts)
 
   const addToCart = async (productId) => {
     const clientid = parseInt(clientdata, 10);
@@ -91,7 +93,8 @@ const Products = () => {
 
   const addToWishlist = async (productId) => {
     const clientid = parseInt(clientdata, 10);
-    await axios.post("http://localhost/ecommerce%20project/client/wishlist.php", { clientid, productid: productId });
+    const res = await axios.post("http://localhost/ecommerce%20project/client/wishlist.php", { clientid, productid: productId });
+    console.log(res)
   };
 
   return (

@@ -1,16 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext  } from 'react';
 import { contextProviderInfo } from '../../context/ContextProvider';
 import { IoIosRemoveCircle } from 'react-icons/io';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
   const { clientdata, listItems, setListItems } = useContext(contextProviderInfo);
   const [deleteThatProduct, setDeleteThatProduct] = useState(0);
   const [totalOrder, setTotalOrder] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    if(!clientdata){
+      navigate('/Login')
+    }
     const fetchCartItems = async () => {
       try {
         const cartResponse = await fetch("http://localhost/ecommerce%20project/client/getCartItems.php");
@@ -73,7 +76,7 @@ const Cart = () => {
         ))}
       </div>
       <div className='w-full lg:w-1/3 p-8 bg-white shadow rounded-lg text-center mt-8 lg:mt-0'>
-        <div className='text-2xl font-semibold'>Your Total Order</div>
+        <div className='text-2xl font-semibold'>Votre commande totale</div>
         <div className='text-4xl mt-4 text-green-700 font-bold'>{totalOrder} DH</div>
         <Link to="/Payment">
           <div className='bg-green-700 text-white rounded-2xl w-56 mx-auto mt-8 shadow-lg cursor-pointer hover:bg-green-600 h-10 pt-2 text-xl'>

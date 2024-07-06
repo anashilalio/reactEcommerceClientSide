@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaTrashAlt } from "react-icons/fa";
 import { PiNotePencilBold } from "react-icons/pi";
 import { TiDelete } from "react-icons/ti";
 import axios from 'axios';
+import { contextProviderInfo } from '../../context/ContextProvider';
 
-const Books = () => {
+const BooksStatus = () => {
     const [books, setBooks] = useState([]);
     const [modify, setModify] = useState(false);
     const [name, setProductname] = useState("");
@@ -21,12 +22,12 @@ const Books = () => {
     const [deletes, setDeletes] = useState(false);
     const [deletebook, setDeletebook] = useState("");
     const [search, setSearch] = useState("");
-
+    const {clientdata } = useContext(contextProviderInfo)
     useEffect(() => {
         const listOfBooks = async () => {
-            const response = await fetch("http://localhost/ecommerce%20project/client/product.php");
-            const json = await response.json();
-            setBooks(json);
+            const clientid = parseInt(clientdata)
+            const response = await axios.post("http://localhost/ecommerce%20project/admin/buyer/status.php" , {clientid});
+            setBooks(response.data);
         };
         const getCategories = async () => {
             const response = await fetch("http://localhost/ecommerce%20project/client/getCategorie.php");
@@ -36,27 +37,8 @@ const Books = () => {
         listOfBooks();
         getCategories();
     }, [deletebook, modify]);
+    
 
-    const modifyBook = async () => {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('price', price);
-        formData.append('categorie', categorie);
-        formData.append('image', image);
-        formData.append('autheur', autheur);
-        formData.append('date', bookDate);
-        formData.append('createdDate', createdDate);
-        formData.append('bookLink', bookLink);
-        formData.append('file', file);
-
-        const response = await axios.post('http://localhost/ecommerce%20project/admin/addProduct.php', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        console.log(response);
-    };
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
@@ -92,26 +74,37 @@ const Books = () => {
                 />
             </div>
             <div className='overflow-hidden '>
-                <div className='grid grid-cols-6 gap-4 p-4 bg-gray-200 rounded-lg text-lg font-semibold text-gray-700 shadow-md'>
+                <div className='grid grid-cols-7 gap-4 p-4 bg-gray-200 rounded-lg text-lg font-semibold text-gray-700 shadow-md'>
                     <div>Image</div>
                     <div>Titre</div>
                     <div>Catégorie</div>
                     <div>Aut</div>
                     <div>Date</div>
-                    <div className='text-center'>Actions</div>
+                    <div className='text-center'>Supprimer</div>
+                    <div className='text-center'>Status</div>
+
                 </div>
                 {filteredBooks.map((book) => (
-                    <div key={book.name} className='grid grid-cols-6 gap-4 p-4 bg-white rounded-lg shadow-md mt-4 hover:bg-gray-50'>
+                    <div key={book.name} className='grid grid-cols-7 gap-4 p-4 bg-white rounded-lg shadow-md mt-4 hover:bg-gray-50'>
                         <div>
                             <img src={`http://localhost/ecommerce%20project/admin/${book.images}`} className='h-16 w-12 object-cover rounded-lg' alt={book.name} />
                         </div>
                         <div className='flex items-center'>{book.name}</div>
                         <div className='flex items-center'>{book.categorie}</div>
                         <div className='flex items-center'>{book.autheur}</div>
-                        <div className='flex items-center'>{book.dat}</div>
+                        <div className='flex items-center'>{book.dat}</div>{console.log(book.images)} 
                         <div className='flex items-center justify-center gap-4'>
-                            <PiNotePencilBold className='text-blue-500 hover:text-blue-700 cursor-pointer' onClick={() => setModify(true)} />
                             <FaTrashAlt className='text-red-500 hover:text-red-700 cursor-pointer' onClick={() => { setDeletebook(book.productid); setDeletes(true); }} />
+                        </div>
+                        <div className='flex items-center justify-center gap-4 text-white w-24 h-12 mt-2 rounded-xl  mx-auto' >
+                            {book.approved === 'yes' ? (
+                                <div className='text-green-600'>approuvé</div>
+                            )    : (
+                                <>
+                                <div className='text-red-600'>En attent</div>
+                                </>
+                            )
+                        }
                         </div>
                     </div>
                 ))}
@@ -158,4 +151,4 @@ const Books = () => {
     );
 }
 
-export default Books;
+export default BooksStatus;

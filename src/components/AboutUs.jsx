@@ -71,7 +71,7 @@ const AboutUs = () => {
           </div>
           <div className='w-130 text-3xl font-mono font-semibold'>
 
-            We are committed to providing exceptional customer service. Our dedicated support team is available 24/7 to assist you with any questions or issues you may have. From technical support to book recommendations, we're here to help.                </div>
+          Nous nous engageons à fournir un service client exceptionnel. Notre équipe d'assistance dédiée est disponible 24h/24 et 7j/7 pour vous aider avec toutes vos questions ou problèmes. Du support technique aux recommandations de livres, nous sommes là pour vous aider.</div>
 
 
 

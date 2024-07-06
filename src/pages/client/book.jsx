@@ -50,7 +50,11 @@ const Book = () => {
     fetchReviews();
     setLoading(false);
   }, [clientdata]);
-
+  const addToWishlist =async(productid)=>{
+    const clientid = parseInt(clientdata);
+    const send = await axios.post("http://localhost/ecommerce%20project/client/wishlist.php" , {clientid , productid});
+    console.log(send.data)
+  }
   const filterBook = bookI.filter(e => e.productid === id);
 
   const addToCart = async () => {
@@ -106,18 +110,17 @@ const Book = () => {
                 <div>
                   <a href={`http://localhost/ecommerce%20project/admin/uploads/${bk.link}`}>
                     <button className="bg-green-500 text-white px-8 py-2 text-3xl rounded-2xl mt-12 w-full hover:bg-opacity-90 shadow-2xl">
-                      Download
+                      Télélcharger
                     </button>
                   </a>
                 </div>
               ) : (
                 <div className='flex items-center mt-12 gap-12'>
                   <button onClick={addToCart} className="bg-black text-white px-44 py-2 text-3xl rounded-xl  w-full hover:bg-opacity-90 shadow-2xl">
-                    Add to Cart
-                  </button>
+                  Ajouter au panier                  </button>
                   <div className="">
                     <button className="   ">
-                    <FaHeart className='size-12 hover:opacity-70'/>
+                    <FaHeart className='size-12 hover:opacity-70' onClick={()=>addToWishlist(bk.productid)}/>
                     </button>
                   </div>
                 </div>

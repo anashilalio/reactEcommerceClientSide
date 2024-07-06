@@ -80,7 +80,8 @@ const Charts = () => {
       
       <div className='mt-12'>
         <div className='shadow-xl bg-gray-100 p-4 rounded-xl'>
-          <div className='text-4xl font-mono font-extrabold mb-2'>Monthly Earnings</div>
+          <div className='text-4xl font-mono font-extrabold mb-2'>Gains mensuels
+          </div>
           <LineChart
             xAxis={[{ data: earning.map(e => `Month ${e.month}`), scaleType: 'band' }]}
             series={[{ data: earning.map(e => parseInt(e.earnings)) }]}

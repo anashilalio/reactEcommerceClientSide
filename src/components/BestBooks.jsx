@@ -10,19 +10,19 @@ const books = [
   {
     image: habits,
     title: "The 7 Habits of Highly Effective People",
-    description: "The 7 Habits of Highly Effective People, first published in 1989, is a business and self-help book written by Stephen R. Covey. Covey defines effectiveness as the balance of obtaining desirable results with caring for that which produces those results.",
+    description: "Les 7 habitudes des personnes hautement efficaces, publié pour la première fois en 1989, est un livre d'affaires et d'auto-assistance écrit par Stephen R. Covey. Covey définit l'efficacité comme l'équilibre entre l'obtention des résultats souhaités et le soin apporté à ce qui produit ces résultats.",
     author: "Stephen R. Covey"
   },
   {
     image: deepwork,
     title: "Deep Work",
-    description: "Deep Work: Rules for Focused Success in a Distracted World is a book by Cal Newport. The book argues that the ability to focus without distraction is a crucial skill that allows individuals to quickly master complicated information and produce better results in less time.",
+    description: "Travail en profondeur : règles pour un succès ciblé dans un monde distrait est un livre de Cal Newport. Le livre soutient que la capacité de se concentrer sans distraction est une compétence cruciale qui permet aux individus de maîtriser rapidement des informations complexes et de produire de meilleurs résultats en moins de temps.",
     author: "Cal Newport"
   },
   {
     image: digitalMinimalism,
     title: "Digital Minimalism",
-    description: "Digital Minimalism: Choosing a Focused Life in a Noisy World is a book by Cal Newport. The book presents a philosophy for technology use, arguing that we should be more intentional and selective in our use of digital tools.",
+    description: "Minimalisme numérique : choisir une vie ciblée dans un monde bruyant est un livre de Cal Newport. Le livre présente une philosophie d'utilisation de la technologie, affirmant que nous devrions être plus intentionnels et sélectifs dans notre utilisation des outils numériques.",
     author: "Cal Newport"
   }
 ];

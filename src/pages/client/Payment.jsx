@@ -91,31 +91,31 @@ const PaymentForm = () => {
           <form onSubmit={handlePayment} className='space-y-4 mt-8 bg-white p-8 rounded-lg shadow-md'>
             <div className='flex gap-4'>
               <div className='flex flex-col w-full'>
-                <label htmlFor="firstName" className='font-semibold'>First Name</label>
+                <label htmlFor="firstName" className='font-semibold'>Nom</label>
                 <input type="text" id="firstName" className='w-full h-12 shadow-lg rounded-lg outline-none px-4' required />
               </div>
               <div className='flex flex-col w-full'>
-                <label htmlFor="lastName" className='font-semibold'>Last Name</label>
+                <label htmlFor="lastName" className='font-semibold'>Prénom</label>
                 <input type="text" id="lastName" className='w-full h-12 shadow-lg rounded-lg outline-none px-4' required />
               </div>
             </div>
             <div className='flex gap-4'>
               <div className='flex flex-col w-full'>
-                <label htmlFor="phoneNumber" className='font-semibold'>Phone Number</label>
+                <label htmlFor="phoneNumber" className='font-semibold'>Nombre de téléphone</label>
                 <input type="text" id="phoneNumber" className='w-full h-12 shadow-lg rounded-lg outline-none px-4' required />
               </div>
               <div className='flex flex-col w-full'>
-                <label htmlFor="email" className='font-semibold'>Email</label>
+                <label htmlFor="email" className='font-semibold'>l'Email</label>
                 <input type="email" id="email" className='w-full h-12 shadow-lg rounded-lg outline-none px-4' required />
               </div>
             </div>
             <div className='flex flex-col'>
-              <label htmlFor="cardNumber" className='font-semibold'>Card Number</label>
+              <label htmlFor="cardNumber" className='font-semibold'>Nombre de cart</label>
               <CardNumberElement id="cardNumber" className='w-full h-12 shadow-lg rounded-lg px-4 outline-none' options={{ style: { base: { fontSize: '18px', padding: '10px' } } }} />
             </div>
             <div className='flex gap-4'>
               <div className='flex flex-col w-full'>
-                <label htmlFor="cardExpiry" className='font-semibold'>Expiration Date</label>
+                <label htmlFor="cardExpiry" className='font-semibold'>Date d'expiration</label>
                 <CardExpiryElement id="cardExpiry" className='w-full h-12 shadow-lg px-4 outline-none rounded-lg' options={{ style: { base: { fontSize: '18px', padding: '10px' } } }} />
               </div>
               <div className='flex flex-col w-full'>

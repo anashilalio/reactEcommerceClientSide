@@ -19,7 +19,7 @@ const Hero = () => {
             </Link>
             <input
               type="text"
-              placeholder='SEARCH FOR A BOOK'
+              placeholder='RECHERCHER UN LIVRE'
               className='w-full rounded-full outline-none text-black px-12 border h-16 bg-white shadow shadow-green-200'
               value={search}
               onChange={(e) => setSearch(e.target.value)}

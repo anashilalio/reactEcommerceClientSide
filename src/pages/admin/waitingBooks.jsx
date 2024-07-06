@@ -4,7 +4,7 @@ import { PiNotePencilBold } from "react-icons/pi";
 import { TiDelete } from "react-icons/ti";
 import axios from 'axios';
 
-const Books = () => {
+const WaitingBooks = () => {
     const [books, setBooks] = useState([]);
     const [modify, setModify] = useState(false);
     const [name, setProductname] = useState("");
@@ -21,10 +21,10 @@ const Books = () => {
     const [deletes, setDeletes] = useState(false);
     const [deletebook, setDeletebook] = useState("");
     const [search, setSearch] = useState("");
-
+    
     useEffect(() => {
         const listOfBooks = async () => {
-            const response = await fetch("http://localhost/ecommerce%20project/client/product.php");
+            const response = await fetch("http://localhost/ecommerce%20project/admin/buyer/Books.php");
             const json = await response.json();
             setBooks(json);
         };
@@ -36,7 +36,10 @@ const Books = () => {
         listOfBooks();
         getCategories();
     }, [deletebook, modify]);
-
+    const approve=async (productid)=>{
+        const send = await axios.post("http://localhost/ecommerce%20project/admin/approveBook.php" , {productid})
+        console.log(send)
+    }
     const modifyBook = async () => {
         const formData = new FormData();
         formData.append('name', name);
@@ -92,16 +95,18 @@ const Books = () => {
                 />
             </div>
             <div className='overflow-hidden '>
-                <div className='grid grid-cols-6 gap-4 p-4 bg-gray-200 rounded-lg text-lg font-semibold text-gray-700 shadow-md'>
+                <div className='grid grid-cols-7 gap-4 p-4 bg-gray-200 rounded-lg text-lg font-semibold text-gray-700 shadow-md'>
                     <div>Image</div>
                     <div>Titre</div>
                     <div>Catégorie</div>
-                    <div>Aut</div>
+                    <div>Auteur</div>
                     <div>Date</div>
-                    <div className='text-center'>Actions</div>
+                    <div className='text-center'>Supprimer</div>
+                    <div className='text-center'>approver</div>
+
                 </div>
                 {filteredBooks.map((book) => (
-                    <div key={book.name} className='grid grid-cols-6 gap-4 p-4 bg-white rounded-lg shadow-md mt-4 hover:bg-gray-50'>
+                    <div key={book.name} className='grid grid-cols-7 gap-4 p-4 bg-white rounded-lg shadow-md mt-4 hover:bg-gray-50'>
                         <div>
                             <img src={`http://localhost/ecommerce%20project/admin/${book.images}`} className='h-16 w-12 object-cover rounded-lg' alt={book.name} />
                         </div>
@@ -110,8 +115,11 @@ const Books = () => {
                         <div className='flex items-center'>{book.autheur}</div>
                         <div className='flex items-center'>{book.dat}</div>
                         <div className='flex items-center justify-center gap-4'>
-                            <PiNotePencilBold className='text-blue-500 hover:text-blue-700 cursor-pointer' onClick={() => setModify(true)} />
-                            <FaTrashAlt className='text-red-500 hover:text-red-700 cursor-pointer' onClick={() => { setDeletebook(book.productid); setDeletes(true); }} />
+                            <FaTrashAlt className='text-red-500 hover:text-red-700 cursor-pointer' onClick={() => { setDeletebook(book.name); setDeletes(true); }} />
+                        </div>
+                        <div className='flex items-center justify-center gap-4 bg-green-400 text-white w-24 h-12 mt-2 rounded-xl cursor-pointer hover:opacity-65 mx-auto' 
+                        onClick={()=>approve(book.productid)}>
+                            approver
                         </div>
                     </div>
                 ))}
@@ -158,4 +166,4 @@ const Books = () => {
     );
 }
 
-export default Books;
+export default WaitingBooks;

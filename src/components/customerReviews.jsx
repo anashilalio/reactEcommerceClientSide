@@ -11,19 +11,19 @@ const CustomersReviews = () => {
     {
       name: 'Anas',
       photo: ahmed,
-      review: 'This is a very good product. I highly recommend it!',
+      review: "Cest un très bon produit. Je le recommande fortement!",
       rating: 4.5,
     },
     {
       name: 'Mohamed',
       photo: ahmed,
-      review: 'The quality is outstanding, and the service was excellent.',
+      review: 'La qualité est exceptionnelle et le service était excellent.',
       rating: 5,
     },
     {
       name: 'Imane',
       photo: imane,
-      review: 'I am very satisfied with my purchase. Will buy again!',
+      review: 'La qualité est exceptionnelle et le service était excellent.',
       rating: 4,
     },
   ];

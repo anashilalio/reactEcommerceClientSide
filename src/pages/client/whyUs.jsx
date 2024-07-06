@@ -26,17 +26,17 @@ const WhyUs = () => {
       <div className="flex flex-col md:flex-row justify-center gap-12 md:gap-24 items-center px-12">
       <div className="flex flex-col items-center text-center space-y-4 w-1/5 h-72 rounded-full bg-black text-white pt-12">
       <FaBookReader className="text-6xl text-white " />
-          <div className="text-3xl font-semibold">Read Anywhere, Anytime</div>
+          <div className="text-3xl font-semibold">Lisez n'importe où, n'importe quand</div>
           {/* <div className="text-gray-600">Our eBooks are compatible with all major devices and platforms, including Kindle, iPad, Nook, and smartphones.</div> */}
         </div>
         <div className="flex flex-col items-center text-center space-y-4 w-1/5 h-72 rounded-full bg-black text-white pt-12">
         <FaStar className="text-6xl " />
-          <div className="text-3xl font-semibold">Reviews</div>
+          <div className="text-3xl font-semibold">Avis</div>
           {/* <div className="text-gray-600">Join our vibrant community of book lovers! Share your thoughts, write reviews, and connect with other readers.</div> */}
         </div>
         <div className="flex flex-col items-center text-center space-y-4 w-1/5 h-72 rounded-full bg-black text-white pt-12">
         <IoSearchSharp className="text-6xl " />
-          <div className="text-3xl font-semibold">Search and Highlight Features</div>
+          <div className="text-3xl font-semibold">Fonctionnalités de recherche et de surbrillance</div>
           {/* <div className="text-gray-600">Ebooks come with powerful search capabilities that let you find specific passages or topics quickly.</div> */}
         </div>
       </div>

@@ -65,7 +65,7 @@ const Reviews = ({productid}) => {
 
   return (
         <div className='w-4/5 mx-auto mt-56 '>
-                <h1 className='text-3xl font-bold'>Reviews</h1>
+                <h1 className='text-3xl font-bold'>Avis</h1>
                 <div className='flex flex-col gap-10 mb-10'>
                    {reviews.map((e)=>{
                     return <ClientReviews  review={e.comments} name={e.username} rate={e.rate} dat={e.dat} photo={e.photo}/>
@@ -91,7 +91,7 @@ const Reviews = ({productid}) => {
                     </div>
                             <textarea type="text" className='w-full outline-none rounded-2xl shadow border p-4 h-28' value={comment} onChange={(e)=>setComment(e.target.value)}/>
                     <div className='mb-4 w-full '>
-                    <input type="submit" className='cursor-pointer bg-green-600 text-white px-4 rounded-2xl text-xl relative hover:opacity-65' style={{left:"91%"}} onClick={()=>sendReview()}/>
+                    <input type="submit" className='cursor-pointer bg-green-600 text-white px-8 py-2 mt-4 rounded text-xl relative hover:opacity-65' style={{left:"91%"}} onClick={()=>sendReview()}/>
 
                     </div>
                     </form>
